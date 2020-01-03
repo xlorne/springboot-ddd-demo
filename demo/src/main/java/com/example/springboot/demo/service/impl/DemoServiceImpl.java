@@ -33,7 +33,7 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     @Transactional
-    public boolean say(String name) {
+    public boolean addUser(String name) {
         //保存用户
         User user = new User();
         user.setName(name);

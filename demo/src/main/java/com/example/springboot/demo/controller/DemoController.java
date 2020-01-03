@@ -17,8 +17,8 @@ public class DemoController {
     @Autowired
     private DemoService demoService;
 
-    @GetMapping("/say")
-    public boolean say(@RequestParam("name") String name){
-        return demoService.say(name);
+    @GetMapping("/addUser")
+    public boolean addUser(@RequestParam("name") String name){
+        return demoService.addUser(name);
     }
 }

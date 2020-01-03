@@ -7,6 +7,6 @@ package com.example.springboot.demo.service;
  */
 public interface DemoService {
 
-    boolean say(String name);
+    boolean addUser(String name);
 
 }
