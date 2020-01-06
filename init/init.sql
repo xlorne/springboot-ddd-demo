@@ -1,19 +1,10 @@
-DROP TABLE IF EXISTS `demo_log`;
-CREATE TABLE `demo_log` (
+DROP TABLE IF EXISTS `t_refrigerator`;
+CREATE TABLE `t_refrigerator` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
+  `value` varchar(10) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
+  `state` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
-
-DROP TABLE IF EXISTS `demo_user`;
-CREATE TABLE `demo_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 SET FOREIGN_KEY_CHECKS = 1;

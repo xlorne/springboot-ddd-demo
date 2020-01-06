@@ -1,15 +1,16 @@
 package com.example.springboot.demo.controller;
 
+import com.example.springboot.demo.pojo.vo.AnimalReq;
+import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author lorne
- * @date 2020/1/3
- * @description
+ * Controller 层完成对数据的检查,调用Service层
  */
 @RestController
 public class DemoController {
@@ -17,8 +18,8 @@ public class DemoController {
     @Autowired
     private DemoService demoService;
 
-    @GetMapping("/addUser")
-    public boolean addUser(@RequestParam("name") String name){
-        return demoService.addUser(name);
+    @PostMapping("/put")
+    public AnimalRes put(@Validated @RequestBody AnimalReq animalReq){
+        return demoService.put(animalReq);
     }
 }

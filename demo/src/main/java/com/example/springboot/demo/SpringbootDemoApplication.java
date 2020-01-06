@@ -1,13 +1,15 @@
 package com.example.springboot.demo;
 
+import com.example.springboot.demo.manager.RefrigeratorManager;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.PostConstruct;
 
 
-@MapperScan("com.example.springboot.demo.mapper")
+@MapperScan("com.example.springboot.demo.manager.mapper")
 @SpringBootApplication
 public class SpringbootDemoApplication {
 
@@ -15,9 +17,14 @@ public class SpringbootDemoApplication {
         SpringApplication.run(SpringbootDemoApplication.class, args);
     }
 
-    @Bean
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
+    @Autowired
+    private RefrigeratorManager refrigeratorManager;
+
+    @PostConstruct
+    public void init(){
+        refrigeratorManager.init();
     }
+
+
 
 }
