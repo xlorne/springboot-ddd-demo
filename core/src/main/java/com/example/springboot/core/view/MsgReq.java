@@ -12,5 +12,9 @@ public class MsgReq {
 
     private String data;
 
-
+    public static MsgReq create(String data){
+        MsgReq msgReq = new MsgReq();
+        msgReq.setData(data);
+        return msgReq;
+    }
 }

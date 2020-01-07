@@ -1,0 +1,25 @@
+language: java
+
+jdk: openjdk8
+
+branches:
+  only:
+  - new
+
+services:
+- mysql
+
+before_install:
+- pip install --user codecov
+- mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+- mysql -u root --password=  < ./init/init.sql
+
+script:
+- mvn clean install -DskipTests=false -P travis
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+
+env:
+  global:
+  - CODECOV_TOKEN=035a54c6-9570-4863-b512-49ed800db266
