@@ -1,13 +1,14 @@
 package com.example.springboot.demo.pojo.vo;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Data
 public class AnimalReq {
 
-    @Length(max = 4)
+    @Size(max = 4)
     @NotEmpty
     private String name;
 
