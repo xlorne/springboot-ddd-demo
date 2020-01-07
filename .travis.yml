@@ -11,7 +11,7 @@ services:
 
 before_install:
 - pip install --user codecov
-#- mysql -u root --password=  < ./sql/init.sql
+- mysql -u root --password=  < ./init/init.sql
 
 script:
 - mvn clean install -DskipTests=false -P travis
