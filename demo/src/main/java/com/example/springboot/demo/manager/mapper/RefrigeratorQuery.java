@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface RefrigeratorQuery {
 
-    @Select("select * from t_refrigerator where state = 0 limit 1 ")
+    @Select("SELECT * FROM T_REFRIGERATOR WHERE STATE = 0 LIMIT 1 ")
     Refrigerator findSpace();
 
 
