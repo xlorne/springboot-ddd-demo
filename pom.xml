@@ -65,6 +65,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <boot.profile>dev</boot.profile>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -108,6 +111,9 @@
         </profile>
         <profile>
             <id>travis</id>
+            <properties>
+                <boot.profile>travis</boot.profile>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
