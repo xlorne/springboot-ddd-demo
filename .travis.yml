@@ -14,10 +14,10 @@ before_install:
 - mysql -u root --password=  < ./init/init.sql
 
 before_script:
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+- echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
 script:
-- mvn clean install -DskipTests=false -P travis
+- mvn clean install -P travis
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
