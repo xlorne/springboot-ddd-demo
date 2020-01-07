@@ -60,7 +60,79 @@ DB 层分为Query和Update操作，直接对数据做处理。
     2. 有相对完善的资料文档
     3. 有相对全面的单元测试
     4. 有良好的设计模式，可支持添加功能时尽量增加而不修改
+ 
+## 开发规范要求
 
+### 代码规范
+[Google Java Code Style](https://blog.csdn.net/yuanmomoya/article/details/100100514)
+
+###  注释要求
+
+项目中着重需要在Service层以及Manager层写清楚业务执行的逻辑注释。对业务流程比较复杂的可以通过列步骤来说,1、2、3..
+
+DemoService层代码示例如下:
+```java
+  /**
+   * 将大象放进冰箱
+   * 1、找到冰箱的有效空间
+   * 2、将大象存进冰箱
+   * 3、通知消息已存放成功
+   * 
+   * @param req 大象
+   * @return  大象所在位置
+   */
+  @Override
+  @Transactional
+  public AnimalRes put(AnimalReq req) {
+    String name = req.getName();
+
+    //放进大象 对应操作是将大象存到冰箱空间里面
+    int id =refrigeratorManager.putAnimal(name);
+
+    //关闭冰箱 对应操作是提交事务，实际本地事务已提交,这里就换成发送一条通知消息
+    messageClient.send(MsgReq.create(id,name));
+
+    return AnimalRes.ok(id);
+  }
+  
+```
+
+Manager层代码示例如下:
+```java
+  /**
+   * 查找冰箱的余留位置
+   * @return  可存放的空间
+   */
+  public Refrigerator findSpace() {
+    Refrigerator refrigerator = refrigeratorQuery.findSpace();
+    if (refrigerator == null) {
+      throw new RuntimeException("抱歉冰箱已经满了.");
+    }
+    return refrigerator;
+  }
+
+
+  /**
+   * 保存动物到冰箱
+   * 1、先从冰箱中找到一个位置
+   * 2、然后将动物保存到冰箱中
+   * @param name  动物名称
+   * @return  格栅Id
+   */
+  public int putAnimal(String name) {
+    //打开冰箱 对应操作是找到一个存储大象的空间
+    Refrigerator refrigerator =  findSpace();
+    //放进大象 对应操作是将大象存到冰箱空间里面
+    refrigeratorMapper.updateValue(name, new Date(), refrigerator.getId());
+
+    //返回格栅Id
+    return refrigerator.getId();
+  }
+```
+
+### 层次划分要求
+
+ 
 
 
 

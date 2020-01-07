@@ -15,15 +15,16 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class SpringbootDemoConfiguration {
 
-    @Bean
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public DemoService demoService(RefrigeratorManager refrigeratorManager,MessageClient messageClient){
-        return new DemoServiceImpl(refrigeratorManager, messageClient);
-    }
+  @Bean
+  @ConditionalOnMissingBean
+  public DemoService demoService(RefrigeratorManager refrigeratorManager,
+      MessageClient messageClient) {
+    return new DemoServiceImpl(refrigeratorManager, messageClient);
+  }
 
 }

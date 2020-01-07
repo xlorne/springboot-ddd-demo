@@ -11,7 +11,13 @@ import java.util.Date;
 @NoArgsConstructor
 public class AnimalRes {
 
-    private int id;
-    private Date time;
+  private int id;
+  private Date time;
 
+  public static AnimalRes ok(int id) {
+    AnimalRes res = new AnimalRes();
+    res.setId(id);
+    res.setTime(new Date());
+    return res;
+  }
 }

@@ -13,18 +13,17 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class SpringbootDemoApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringbootDemoApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(SpringbootDemoApplication.class, args);
+  }
 
-    @Autowired
-    private RefrigeratorManager refrigeratorManager;
+  @Autowired
+  private RefrigeratorManager refrigeratorManager;
 
-    @PostConstruct
-    public void init(){
-        refrigeratorManager.init();
-    }
-
+  @PostConstruct
+  public void init() {
+    refrigeratorManager.init();
+  }
 
 
 }

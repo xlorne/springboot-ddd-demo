@@ -9,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class MessageClient {
 
-    @Autowired
-    private RestTemplate restTemplate;
+  @Autowired
+  private RestTemplate restTemplate;
 
-    public MsgRes send(MsgReq msgReq) {
-        return restTemplate.postForObject("http://127.0.0.1:8088/send",msgReq, MsgRes.class);
-    }
+  public MsgRes send(MsgReq msgReq) {
+    return restTemplate.postForObject("http://127.0.0.1:8088/send", msgReq, MsgRes.class);
+  }
 }

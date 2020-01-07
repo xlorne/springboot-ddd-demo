@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-    @Autowired
-    private DemoService demoService;
+  @Autowired
+  private DemoService demoService;
 
-    @PostMapping("/put")
-    public AnimalRes put(@Validated @RequestBody AnimalReq animalReq){
-        return demoService.put(animalReq);
-    }
+
+  @PostMapping("/put")
+  public AnimalRes put(@Validated @RequestBody AnimalReq animalReq) {
+    return demoService.put(animalReq);
+  }
 }
