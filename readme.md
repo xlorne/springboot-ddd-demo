@@ -1,4 +1,6 @@
 # 如何做好一个后端项目
+[![Build Status](https://travis-ci.org/1991wangliang/springboot-demo.svg?branch=new)](https://travis-ci.org/1991wangliang/springboot-demo)
+[![codecov](https://codecov.io/gh/1991wangliang/springboot-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/1991wangliang/springboot-demo)
 
 什么样的项目是一个好的项目,如何做好一个项目？这个问题我考虑过很久，由于之前一直做项目外包，也接触到的了比较多的项目，但是我一直没有感觉到自己做过的哪个项目是可以称为好项目，我提交的这份代码，或许也是很多研发人员开发业务的风格。
 
