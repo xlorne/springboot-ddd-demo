@@ -17,7 +17,7 @@ before_script:
 - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
 script:
-- mvn clean install -P travis
+- mvn clean test -P travis
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
