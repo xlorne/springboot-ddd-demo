@@ -1,4 +1,4 @@
-package com.example.springboot.demo.manager.domain;
+package com.example.springboot.demo.db.entity;
 
 import lombok.Data;
 

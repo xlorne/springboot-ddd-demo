@@ -11,10 +11,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class AnimalRes {
 
-  private int id;
+  private long id;
   private Date time;
 
-  public static AnimalRes ok(int id) {
+  public static AnimalRes ok(long id) {
     AnimalRes res = new AnimalRes();
     res.setId(id);
     res.setTime(new Date());

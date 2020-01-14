@@ -1,6 +1,6 @@
-package com.example.springboot.demo.manager.mapper;
+package com.example.springboot.demo.db.mapper;
 
-import com.example.springboot.demo.manager.domain.Refrigerator;
+import com.example.springboot.demo.db.entity.Refrigerator;
 import java.util.Date;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

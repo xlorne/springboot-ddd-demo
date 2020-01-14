@@ -12,7 +12,7 @@ public class MsgReq {
 
     private String data;
 
-    public static MsgReq create(int id,String name){
+    public static MsgReq create(long id,String name){
         MsgReq msgReq = new MsgReq();
         String data = String.format("%s->id:%d", name,id);
         msgReq.setData(data);
