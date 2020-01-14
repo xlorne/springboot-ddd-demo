@@ -1,8 +1,9 @@
-package com.example.springboot.demo.domain;
+package com.example.springboot.demo.phase;
 
-import com.example.springboot.core.context.IDomainContext;
 import com.example.springboot.core.context.RefrigeratorContext;
 import com.example.springboot.core.context.RefrigeratorData;
+import com.example.springboot.core.framework.BizContext;
+import com.example.springboot.core.framework.phase.BizPhase;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.db.entity.Refrigerator;
 import com.example.springboot.core.view.MsgRes;
@@ -18,34 +19,25 @@ import lombok.AllArgsConstructor;
  */
 
 @AllArgsConstructor
-public class RefrigeratorDomain {
+public class RefrigeratorPhase extends BizPhase {
 
+  /** 属性  */
   private long refrigeratorId;
-
   private Refrigerator refrigerator;
-
   private RefrigeratorContext refrigeratorContext;
 
+  /** 资源  */
   private RefrigeratorMapper refrigeratorMapper;
-
   private RefrigeratorQuery refrigeratorQuery;
-
   private MessageClient messageClient;
 
-
-
-  public RefrigeratorDomain(
+  public RefrigeratorPhase(
       RefrigeratorMapper refrigeratorMapper,
       RefrigeratorQuery refrigeratorQuery,
       MessageClient messageClient) {
     this.refrigeratorMapper = refrigeratorMapper;
     this.refrigeratorQuery = refrigeratorQuery;
     this.messageClient = messageClient;
-  }
-
-
-  public void initData(IDomainContext domainContext){
-    this.refrigeratorContext = ((RefrigeratorContext)domainContext);
   }
 
   /**
@@ -81,7 +73,24 @@ public class RefrigeratorDomain {
 
   public void sendMsg(){
     MsgRes msgRes =  messageClient.send(new MsgReq(refrigeratorContext));
-    refrigeratorContext.setTime(msgRes.getTime());
+    if(msgRes!=null) {
+      refrigeratorContext.setTime(msgRes.getTime());
+    }
   }
 
+  @Override
+  public void execute(BizContext bizContext) {
+    //初始化数据
+    refrigeratorContext = (RefrigeratorContext) bizContext;
+    //找一个空位置
+    findSpace();
+    //检查位置是否可用
+    checkRefrigerator();
+    //将大象放进冰箱
+    putAnimal();
+    //设置到Context对象
+    setRefrigerator();
+    //发送消息通知
+    sendMsg();
+  }
 }

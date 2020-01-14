@@ -1,11 +1,12 @@
 package com.example.springboot.core.context;
 
+import com.example.springboot.core.framework.BizContext;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class RefrigeratorContext implements IDomainContext,IRefrigeratorContext {
+public class RefrigeratorContext implements BizContext,IRefrigeratorContext {
 
   private String data;
 

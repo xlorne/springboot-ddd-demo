@@ -1,8 +1,9 @@
 package com.example.springboot.demo.service.impl;
 
 import com.example.springboot.core.context.RefrigeratorContext;
-import com.example.springboot.demo.domain.RefrigeratorDomain;
-import com.example.springboot.demo.domain.RefrigeratorDomainFactory;
+import com.example.springboot.core.framework.BizSubjectOperation;
+import com.example.springboot.core.framework.phase.PhaseFactory;
+import com.example.springboot.demo.phase.RefrigeratorPhase;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
@@ -17,8 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DemoServiceImpl implements DemoService {
 
-
-  private RefrigeratorDomainFactory refrigeratorDomainFactory;
+  private PhaseFactory phaseFactory;
 
   /**
    * 将大象放进冰箱
@@ -35,20 +35,9 @@ public class DemoServiceImpl implements DemoService {
 
     RefrigeratorContext refrigeratorContext = new RefrigeratorContext(req.getName());
 
-    RefrigeratorDomain refrigeratorDomain = refrigeratorDomainFactory.createRefrigeratorDomain();
-    //初始化数据
-    refrigeratorDomain.initData(refrigeratorContext);
-    //找一个空位置
-    refrigeratorDomain.findSpace();
-    //检查位置是否可用
-    refrigeratorDomain.checkRefrigerator();
-    //将大象放进冰箱
-    refrigeratorDomain.putAnimal();
+    RefrigeratorPhase refrigeratorPhase = phaseFactory.createPhase(RefrigeratorPhase.class);
 
-    refrigeratorDomain.setRefrigerator();
-
-    //发送消息通知
-    refrigeratorDomain.sendMsg();
+    BizSubjectOperation.operation(refrigeratorContext,refrigeratorPhase);
 
     return AnimalRes.ok(refrigeratorContext);
   }
