@@ -1,10 +1,10 @@
 package com.example.springboot.demo.pojo.vo;
 
+import com.example.springboot.core.context.RefrigeratorContext;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -14,10 +14,11 @@ public class AnimalRes {
   private long id;
   private Date time;
 
-  public static AnimalRes ok(long id) {
+
+  public static AnimalRes ok(RefrigeratorContext refrigeratorContext) {
     AnimalRes res = new AnimalRes();
-    res.setId(id);
-    res.setTime(new Date());
+    res.setId(refrigeratorContext.getRefrigerator().getRefrigeratorId());
+    res.setTime(new Date(refrigeratorContext.getTime()));
     return res;
   }
 }

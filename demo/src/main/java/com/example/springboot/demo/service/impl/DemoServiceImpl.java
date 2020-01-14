@@ -1,5 +1,6 @@
 package com.example.springboot.demo.service.impl;
 
+import com.example.springboot.core.context.RefrigeratorContext;
 import com.example.springboot.demo.domain.RefrigeratorDomain;
 import com.example.springboot.demo.domain.RefrigeratorDomainFactory;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
@@ -32,19 +33,24 @@ public class DemoServiceImpl implements DemoService {
   @Transactional
   public AnimalRes put(AnimalReq req) {
 
+    RefrigeratorContext refrigeratorContext = new RefrigeratorContext(req.getName());
+
     RefrigeratorDomain refrigeratorDomain = refrigeratorDomainFactory.createRefrigeratorDomain();
     //初始化数据
-    refrigeratorDomain.initData(req.getName());
+    refrigeratorDomain.initData(refrigeratorContext);
     //找一个空位置
     refrigeratorDomain.findSpace();
     //检查位置是否可用
     refrigeratorDomain.checkRefrigerator();
     //将大象放进冰箱
     refrigeratorDomain.putAnimal();
+
+    refrigeratorDomain.setRefrigerator();
+
     //发送消息通知
     refrigeratorDomain.sendMsg();
 
-    return AnimalRes.ok(refrigeratorDomain.getRefrigeratorId());
+    return AnimalRes.ok(refrigeratorContext);
   }
 
 }

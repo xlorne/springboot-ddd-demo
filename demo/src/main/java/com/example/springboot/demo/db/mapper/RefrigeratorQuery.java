@@ -1,6 +1,6 @@
 package com.example.springboot.demo.db.mapper;
 
-import com.example.springboot.demo.db.entity.Refrigerator;
+import com.example.springboot.core.db.entity.Refrigerator;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

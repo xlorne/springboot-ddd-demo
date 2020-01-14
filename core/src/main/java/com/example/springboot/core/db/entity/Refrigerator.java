@@ -1,5 +1,6 @@
-package com.example.springboot.demo.db.entity;
+package com.example.springboot.core.db.entity;
 
+import java.io.Serializable;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
  * 这是一个大号的冰箱，也可以理解成为一个冰库
  */
 @Data
-public class Refrigerator {
+public class Refrigerator implements Serializable {
 
   /**
    * 冰箱格栅编号

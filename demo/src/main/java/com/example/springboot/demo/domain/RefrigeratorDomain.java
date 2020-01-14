@@ -1,7 +1,11 @@
 package com.example.springboot.demo.domain;
 
+import com.example.springboot.core.context.IDomainContext;
+import com.example.springboot.core.context.RefrigeratorContext;
+import com.example.springboot.core.context.RefrigeratorData;
 import com.example.springboot.core.view.MsgReq;
-import com.example.springboot.demo.db.entity.Refrigerator;
+import com.example.springboot.core.db.entity.Refrigerator;
+import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.db.mapper.RefrigeratorMapper;
 import com.example.springboot.demo.db.mapper.RefrigeratorQuery;
 import com.example.springboot.demo.feign.MessageClient;
@@ -20,14 +24,14 @@ public class RefrigeratorDomain {
 
   private Refrigerator refrigerator;
 
-  private String data;
-
+  private RefrigeratorContext refrigeratorContext;
 
   private RefrigeratorMapper refrigeratorMapper;
 
   private RefrigeratorQuery refrigeratorQuery;
 
   private MessageClient messageClient;
+
 
 
   public RefrigeratorDomain(
@@ -40,8 +44,8 @@ public class RefrigeratorDomain {
   }
 
 
-  public void initData(String data){
-    this.data =data;
+  public void initData(IDomainContext domainContext){
+    this.refrigeratorContext = ((RefrigeratorContext)domainContext);
   }
 
   /**
@@ -57,23 +61,27 @@ public class RefrigeratorDomain {
     if (refrigerator == null) {
       throw new RuntimeException("抱歉冰箱已经满了.");
     }
+    //返回格栅Id
+    refrigeratorId = refrigerator.getId();
   }
 
   /**
    * 保存动物到冰箱
    */
   public void putAnimal() {
+    refrigerator.setValue(refrigeratorContext.getData());
+    refrigerator.setTime(new Date());
     //放进大象 对应操作是将大象存到冰箱空间里面
-    refrigeratorMapper.updateValue(data, new Date(), refrigerator.getId());
-    //返回格栅Id
-    refrigeratorId = refrigerator.getId();
+    refrigeratorMapper.updateValue(refrigerator);
+  }
+
+  public void setRefrigerator(){
+    refrigeratorContext.setRefrigerator(new RefrigeratorData(refrigeratorId,refrigerator));
   }
 
   public void sendMsg(){
-    messageClient.send(MsgReq.create(refrigeratorId,data));
+    MsgRes msgRes =  messageClient.send(new MsgReq(refrigeratorContext));
+    refrigeratorContext.setTime(msgRes.getTime());
   }
 
-  public long getRefrigeratorId() {
-    return refrigeratorId;
-  }
 }

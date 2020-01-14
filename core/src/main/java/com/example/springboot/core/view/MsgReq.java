@@ -1,6 +1,9 @@
 package com.example.springboot.core.view;
 
+import com.example.springboot.core.context.RefrigeratorContext;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author lorne
@@ -8,14 +11,10 @@ import lombok.Data;
  * @description
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MsgReq {
 
-    private String data;
+    private RefrigeratorContext context;
 
-    public static MsgReq create(long id,String name){
-        MsgReq msgReq = new MsgReq();
-        String data = String.format("%s->id:%d", name,id);
-        msgReq.setData(data);
-        return msgReq;
-    }
 }

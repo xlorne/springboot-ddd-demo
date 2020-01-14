@@ -1,6 +1,6 @@
 package com.example.springboot.demo.db.mapper;
 
-import com.example.springboot.demo.db.entity.Refrigerator;
+import com.example.springboot.core.db.entity.Refrigerator;
 import java.util.Date;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,7 +17,7 @@ public interface RefrigeratorMapper {
   int save(Refrigerator refrigerator);
 
   @Update("UPDATE T_REFRIGERATOR SET VALUE = #{value},TIME=#{time},STATE=1 WHERE ID = #{id}")
-  int updateValue(@Param("value") String value, @Param("time") Date time, @Param("id") int id);
+  int updateValue(Refrigerator refrigerator);
 
   @Update("TRUNCATE T_REFRIGERATOR")
   void truncate();
