@@ -2,11 +2,10 @@ package com.example.springboot.core.framework.context;
 
 import com.example.springboot.core.framework.BizSubjectOperation;
 import com.example.springboot.core.framework.phase.BizPhase;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BizContext implements Serializable {
+public class BizContext{
 
   private Map<Class<? extends SupportedBizContext>,SupportedBizContext> map = new HashMap<>();
 
