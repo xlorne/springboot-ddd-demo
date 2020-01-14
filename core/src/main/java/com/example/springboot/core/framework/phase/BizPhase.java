@@ -6,6 +6,9 @@ import com.example.springboot.core.framework.step.BizStep;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 商家阶段步骤
+ */
 public abstract class BizPhase implements Observer {
 
   private List<BizStep> steps = new ArrayList<>();
