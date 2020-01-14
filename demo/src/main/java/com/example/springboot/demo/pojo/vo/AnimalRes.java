@@ -1,6 +1,6 @@
 package com.example.springboot.demo.pojo.vo;
 
-import com.example.springboot.core.context.RefrigeratorContext;
+import com.example.springboot.demo.phase.RefrigeratorPhase;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +15,10 @@ public class AnimalRes {
   private Date time;
 
 
-  public static AnimalRes ok(RefrigeratorContext refrigeratorContext) {
+  public static AnimalRes ok(RefrigeratorPhase refrigeratorPhase) {
     AnimalRes res = new AnimalRes();
-    res.setId(refrigeratorContext.getRefrigerator().getRefrigeratorId());
-    res.setTime(new Date(refrigeratorContext.getTime()));
+    res.setId(refrigeratorPhase.getRefrigeratorId());
+    res.setTime(new Date());
     return res;
   }
 }

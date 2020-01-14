@@ -1,5 +1,7 @@
 package com.example.springboot.core.framework;
 
+import com.example.springboot.core.framework.context.BizContext;
+
 public interface Observer {
 
   /**

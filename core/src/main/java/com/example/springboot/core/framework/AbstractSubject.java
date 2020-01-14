@@ -1,5 +1,6 @@
 package com.example.springboot.core.framework;
 
+import com.example.springboot.core.framework.context.BizContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +29,9 @@ public abstract class AbstractSubject implements Subject {
   }
 
   @Override
-  public void notifyObservers(BizContext bizContext) {
+  public void notifyObservers(BizContext context) {
     for(Observer observer:observers){
-      observer.execute(bizContext);
+      observer.execute(context);
     }
   }
 }

@@ -1,7 +1,7 @@
 package com.example.springboot.core.framework.phase;
 
-import com.example.springboot.core.framework.BizContext;
 import com.example.springboot.core.framework.Observer;
+import com.example.springboot.core.framework.context.BizContext;
 import com.example.springboot.core.framework.step.BizStep;
 import java.util.ArrayList;
 import java.util.List;

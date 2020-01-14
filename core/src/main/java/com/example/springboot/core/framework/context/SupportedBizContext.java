@@ -1,4 +1,4 @@
-package com.example.springboot.core.framework;
+package com.example.springboot.core.framework.context;
 
 
 import java.io.Serializable;
@@ -9,6 +9,7 @@ import java.io.Serializable;
  * 在RPC操作时会传递该对象，因此需要支持序列化
  * 没有具体的接口要求，完全由业务方来定义
  */
-public interface BizContext extends Serializable{
+public interface SupportedBizContext extends Serializable{
+
 
 }

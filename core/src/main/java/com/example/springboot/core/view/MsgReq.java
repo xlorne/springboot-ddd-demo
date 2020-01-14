@@ -1,6 +1,5 @@
 package com.example.springboot.core.view;
 
-import com.example.springboot.core.context.RefrigeratorContext;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MsgReq {
 
-    private RefrigeratorContext context;
+    private long refrigeratorId;
 
+    private String data;
 }

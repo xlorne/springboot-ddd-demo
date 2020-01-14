@@ -1,9 +1,8 @@
 package com.example.springboot.core.framework;
 
-import java.util.List;
+import com.example.springboot.core.framework.context.BizContext;
 
 public class BizSubjectOperation {
-
 
   /**
    * 执行阶段业务
@@ -17,14 +16,5 @@ public class BizSubjectOperation {
     }
     subject.operation(bizContext);
   }
-
-  public static void operation(BizContext bizContext,List<Observer> observers){
-    Subject subject = new BizSubject();
-    for(Observer observer:observers){
-      subject.add(observer);
-    }
-    subject.operation(bizContext);
-  }
-
 
 }
