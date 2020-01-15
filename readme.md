@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/1991wangliang/springboot-demo.svg?branch=new)](https://travis-ci.org/1991wangliang/springboot-demo)
 [![codecov](https://codecov.io/gh/1991wangliang/springboot-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/1991wangliang/springboot-demo)
 
-什么样的项目是一个好的项目,如何做好一个项目？这个问题我考虑过很久，由于之前一直做项目外包，也接触到的了比较多的项目，但是我一直没有感觉到自己做过的哪个项目是可以称为好项目。
+什么样的项目是一个好的项目,如何做好一个项目？这个问题我考虑过很久，由于之前一直做项目外包，也接触到的了比较多的项目，但是我一直没有感觉到自己做过的哪个项目是可以称为好项目，当然做好项目不仅仅单是技术层面的，需要考虑到把握好功能与客户关系、需要有良好的团队配合、考核体系、晋升体系、检查体系等等一系列的保障机制，我们先只从技术层面出发来考虑如何做好一个后端项目。
 
 慢慢看清楚领域模型之后，才有了些体会。先说一下我的结论:颗粒度越大(函数方法代码量越多)，功能调整的可能性就会越大，出现BUG的可能性也会越大，要时刻想尽一切办法去减小颗粒度，这也将会驱使你不断进步。
  
