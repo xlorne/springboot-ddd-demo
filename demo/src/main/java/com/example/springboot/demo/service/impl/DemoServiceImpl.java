@@ -1,5 +1,6 @@
 package com.example.springboot.demo.service.impl;
 
+import com.example.springboot.core.context.RefrigeratorData;
 import com.example.springboot.core.framework.context.BizContext;
 import com.example.springboot.core.framework.phase.PhaseFactory;
 import com.example.springboot.demo.phase.RefrigeratorPhase;
@@ -32,14 +33,17 @@ public class DemoServiceImpl implements DemoService {
   @Transactional
   public AnimalRes put(AnimalReq req) throws Exception {
 
+    RefrigeratorData refrigeratorData = new RefrigeratorData();
+    refrigeratorData.setData(req.getName());
+
+    BizContext context = new BizContext();
+    context.set(refrigeratorData);
+
     RefrigeratorPhase refrigeratorPhase = phaseFactory.createPhase(RefrigeratorPhase.class);
-    refrigeratorPhase.setData(req.getName());
 
-    BizContext bizContext = new BizContext();
-    bizContext.execute(refrigeratorPhase);
+    context.execute(refrigeratorPhase);
 
-
-    return AnimalRes.ok(refrigeratorPhase);
+    return AnimalRes.ok(refrigeratorData);
   }
 
 }
