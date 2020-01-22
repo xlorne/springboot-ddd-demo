@@ -2,22 +2,22 @@ package com.example.springboot.demo.phase;
 
 import com.example.springboot.core.db.entity.Refrigerator;
 import com.example.springboot.core.framework.context.BizContext;
-import com.example.springboot.core.framework.context.SupportedBizContext;
-import com.example.springboot.core.framework.phase.BizPhase;
+import com.example.springboot.core.framework.phase.Phase;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.db.mapper.RefrigeratorMapper;
 import com.example.springboot.demo.db.mapper.RefrigeratorQuery;
 import com.example.springboot.demo.feign.MessageClient;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @Slf4j
-public class RefrigeratorPhase extends BizPhase implements SupportedBizContext {
+public class RefrigeratorPhase extends Phase {
 
   @Getter
   private long refrigeratorId;
@@ -89,7 +89,7 @@ public class RefrigeratorPhase extends BizPhase implements SupportedBizContext {
     //发送消息通知
     sendMsg();
 
-    bizContext.set(this);
+//    bizContext.set(this);
   }
 
 }

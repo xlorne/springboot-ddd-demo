@@ -30,13 +30,13 @@ public class DemoServiceImpl implements DemoService {
    */
   @Override
   @Transactional
-  public AnimalRes put(AnimalReq req) {
+  public AnimalRes put(AnimalReq req) throws Exception {
 
     RefrigeratorPhase refrigeratorPhase = phaseFactory.createPhase(RefrigeratorPhase.class);
     refrigeratorPhase.setData(req.getName());
 
     BizContext bizContext = new BizContext();
-    bizContext.operation(refrigeratorPhase);
+    bizContext.execute(refrigeratorPhase);
 
 
     return AnimalRes.ok(refrigeratorPhase);

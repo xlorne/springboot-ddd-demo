@@ -1,6 +1,6 @@
 package com.example.springboot.core.framework.step;
 
-public interface StepConstructor<T extends BizStep> {
+public interface StepConstructor<T extends Step> {
 
   /**
    * 创建对象

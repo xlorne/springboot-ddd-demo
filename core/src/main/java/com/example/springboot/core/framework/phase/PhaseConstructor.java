@@ -1,6 +1,6 @@
 package com.example.springboot.core.framework.phase;
 
-public interface PhaseConstructor<T extends BizPhase> {
+public interface PhaseConstructor<T extends Phase> {
 
   /**
    * 创建对象

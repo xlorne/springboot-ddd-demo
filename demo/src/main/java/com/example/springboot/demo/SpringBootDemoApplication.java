@@ -1,15 +1,18 @@
 package com.example.springboot.demo;
 
+import com.example.springboot.core.framework.DomainConfiguration;
 import com.example.springboot.demo.service.InitService;
 import javax.annotation.PostConstruct;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @MapperScan("com.example.springboot.demo.db.mapper")
 @SpringBootApplication
+@ImportAutoConfiguration(DomainConfiguration.class)
 public class SpringBootDemoApplication {
 
   public static void main(String[] args) {

@@ -23,7 +23,7 @@ class DemoServiceImplTest {
 
 
     @Test
-    void put() {
+    void put() throws Exception {
         AnimalReq animalReq = new AnimalReq();
         animalReq.setName("大象");
         AnimalRes animalRes =  demoService.put(animalReq);

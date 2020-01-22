@@ -6,8 +6,8 @@ public interface Observer {
 
   /**
    * 观察者执行业务
-   * @param bizContext  观察者全局对象
+   * @param context  观察者全局对象
    */
-  void execute(BizContext bizContext);
+  void execute(BizContext context) throws Exception;
 
 }

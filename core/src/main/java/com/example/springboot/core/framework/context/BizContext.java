@@ -1,11 +1,17 @@
 package com.example.springboot.core.framework.context;
 
 import com.example.springboot.core.framework.BizSubjectOperation;
-import com.example.springboot.core.framework.phase.BizPhase;
+import com.example.springboot.core.framework.Observer;
+import com.example.springboot.core.framework.phase.Phase;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class BizContext{
+/**
+ * BizContext全局对象
+ */
+public class BizContext  {
 
   private Map<Class<? extends SupportedBizContext>,SupportedBizContext> map = new HashMap<>();
 
@@ -21,8 +27,17 @@ public class BizContext{
     return (T)map.get(clazz);
   }
 
-  public void operation(BizPhase... phases){
-    BizSubjectOperation.operation(this,phases);
+  public void execute(Phase... phases)throws Exception{
+    BizSubjectOperation.execute(this,phases);
   }
+
+  public void execute(Observer... observers)throws Exception{
+    BizSubjectOperation.execute(this,observers);
+  }
+
+  public void execute(List<Observer> phases)throws Exception{
+    BizSubjectOperation.execute(this,phases);
+  }
+
 
 }

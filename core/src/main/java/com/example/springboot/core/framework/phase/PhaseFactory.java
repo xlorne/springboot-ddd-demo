@@ -10,8 +10,7 @@ public class PhaseFactory {
 
   private List<PhaseConstructor> constructors;
 
-  public PhaseFactory(
-      List<PhaseConstructor> constructors) {
+  public PhaseFactory(List<PhaseConstructor> constructors) {
     this.constructors = constructors;
   }
 
@@ -29,7 +28,7 @@ public class PhaseFactory {
         }
       }
     }
-    return null;
+    throw new RuntimeException("Not find class:"+clazz.getSimpleName());
   }
 
 }

@@ -10,8 +10,7 @@ public class StepFactory {
 
   private List<StepConstructor> constructors;
 
-  public StepFactory(
-      List<StepConstructor> constructors) {
+  public StepFactory(List<StepConstructor> constructors) {
     this.constructors = constructors;
   }
 
@@ -29,7 +28,7 @@ public class StepFactory {
         }
       }
     }
-    return null;
+    throw new RuntimeException("Not find class:"+clazz.getSimpleName());
   }
 
 }

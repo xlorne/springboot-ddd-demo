@@ -10,7 +10,7 @@ import com.example.springboot.demo.pojo.vo.AnimalRes;
 public interface DemoService {
 
 
-  AnimalRes put(AnimalReq req);
+  AnimalRes put(AnimalReq req) throws Exception;
 
 
 }

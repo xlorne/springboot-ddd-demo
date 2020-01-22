@@ -20,7 +20,7 @@ public class DemoController {
 
 
   @PostMapping("/put")
-  public AnimalRes put(@Validated @RequestBody AnimalReq animalReq) {
+  public AnimalRes put(@Validated @RequestBody AnimalReq animalReq) throws Exception {
     return demoService.put(animalReq);
   }
 }

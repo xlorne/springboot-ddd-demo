@@ -2,9 +2,10 @@ package com.example.springboot.core.framework.context;
 
 
 /**
- *  SupportedBizContext是对BizContext的扩展
+ * SupportedBizContext 是对 {@link com.example.springboot.core.framework.context.BizContext } 的数据扩展
+ *
  */
-public interface SupportedBizContext{
+public interface SupportedBizContext {
 
 
 }

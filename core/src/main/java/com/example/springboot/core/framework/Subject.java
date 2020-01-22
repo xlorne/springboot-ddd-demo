@@ -16,10 +16,10 @@ public interface Subject {
   void del(int index);
 
   /*通知所有的观察者*/
-  void notifyObservers(BizContext context);
+  void notifyObservers(BizContext context)throws Exception;
 
   /*自身的操作*/
-  void operation(BizContext context);
+  void operation(BizContext context)throws Exception;
 
 
 }
