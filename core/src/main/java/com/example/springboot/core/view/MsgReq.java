@@ -1,5 +1,6 @@
 package com.example.springboot.core.view;
 
+import com.alibaba.cola.event.EventI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgReq {
+public class MsgReq implements EventI {
 
     private long refrigeratorId;
 

@@ -1,9 +1,6 @@
 package com.example.springboot.demo.service.impl;
 
-import com.example.springboot.core.context.RefrigeratorData;
-import com.example.springboot.core.framework.context.BizContext;
-import com.example.springboot.core.framework.phase.PhaseFactory;
-import com.example.springboot.demo.phase.RefrigeratorPhase;
+import com.alibaba.cola.command.CommandBus;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
@@ -18,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DemoServiceImpl implements DemoService {
 
-  private PhaseFactory phaseFactory;
+
+  private CommandBus commandBus;
 
   /**
    * 将大象放进冰箱
@@ -32,18 +30,7 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public AnimalRes put(AnimalReq req) throws Exception {
-
-    RefrigeratorData refrigeratorData = new RefrigeratorData();
-    refrigeratorData.setData(req.getName());
-
-    BizContext context = new BizContext();
-    context.set(refrigeratorData);
-
-    RefrigeratorPhase refrigeratorPhase = phaseFactory.createPhase(RefrigeratorPhase.class);
-
-    context.execute(refrigeratorPhase);
-
-    return AnimalRes.ok(refrigeratorData);
+    return (AnimalRes) commandBus.send(req);
   }
 
 }

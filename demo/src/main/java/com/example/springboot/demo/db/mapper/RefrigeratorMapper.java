@@ -1,10 +1,8 @@
 package com.example.springboot.demo.db.mapper;
 
-import com.example.springboot.core.db.entity.Refrigerator;
-import java.util.Date;
+import com.example.springboot.demo.db.domain.Refrigerator;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
 /**

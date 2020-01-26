@@ -1,24 +1,24 @@
 package com.example.springboot.demo.pojo.vo;
 
-import com.example.springboot.core.context.RefrigeratorData;
-import com.example.springboot.demo.phase.RefrigeratorPhase;
-import java.util.Date;
+import com.alibaba.cola.dto.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalRes {
+public class AnimalRes extends Response {
 
   private long id;
   private Date time;
 
 
-  public static AnimalRes ok(RefrigeratorData refrigeratorData) {
+  public static AnimalRes ok(long id) {
     AnimalRes res = new AnimalRes();
-    res.setId(refrigeratorData.getRefrigeratorId());
+    res.setId(id);
     res.setTime(new Date());
     return res;
   }

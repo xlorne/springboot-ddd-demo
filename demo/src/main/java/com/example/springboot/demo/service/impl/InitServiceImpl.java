@@ -1,6 +1,6 @@
 package com.example.springboot.demo.service.impl;
 
-import com.example.springboot.core.db.entity.Refrigerator;
+import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.db.mapper.RefrigeratorMapper;
 import com.example.springboot.demo.service.InitService;
 import java.util.Date;
