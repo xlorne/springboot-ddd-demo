@@ -1,12 +1,9 @@
 package com.example.springboot.demo.command;
 
 import com.alibaba.cola.command.Command;
-import com.alibaba.cola.command.CommandExecutorI;
-import com.alibaba.cola.event.EventBus;
+import com.example.springboot.demo.domain.RefrigeratorDomain;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
-import com.example.springboot.domain.RefrigeratorDomain;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author lorne
@@ -14,16 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @description
  */
 @Command
-public class RefrigeratorDataExe implements CommandExecutorI<AnimalRes, AnimalReq> {
-
-    @Autowired
-    private EventBus eventBus;
+public class RefrigeratorDataExe extends AbsDomainCommandExecutor<AnimalRes, AnimalReq> {
 
     @Override
     public AnimalRes execute(AnimalReq cmd) {
-        RefrigeratorDomain refrigeratorDomain = new RefrigeratorDomain(cmd.getName());
-        refrigeratorDomain.setBus(eventBus);
-        refrigeratorDomain.execute();
+        RefrigeratorDomain refrigeratorDomain = createDomainAndExecute(RefrigeratorDomain.class,cmd.getName());
         return AnimalRes.ok(refrigeratorDomain.getId());
     }
+
 }

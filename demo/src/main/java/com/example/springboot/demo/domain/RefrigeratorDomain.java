@@ -1,9 +1,8 @@
-package com.example.springboot.domain;
+package com.example.springboot.demo.domain;
 
-import com.alibaba.cola.event.EventBus;
-import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
+import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.event.FindRefrigeratorEventHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,11 +14,9 @@ import java.util.Date;
  * @description
  */
 @Slf4j
-public class RefrigeratorDomain implements DomainI {
+public class RefrigeratorDomain extends DomainObject {
 
-    String data;
-
-    EventBus eventBus;
+    private String data;
 
     private Refrigerator refrigerator;
     private long refrigeratorId;
@@ -28,10 +25,6 @@ public class RefrigeratorDomain implements DomainI {
         this.data = data;
     }
 
-    @Override
-    public void setBus(EventBus eventBus) {
-        this.eventBus = eventBus;
-    }
 
     @Override
     public void execute() {
