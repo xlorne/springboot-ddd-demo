@@ -1,5 +1,5 @@
 /**
- * This package contains {@link CommandExecutorI} and {@link QueryExecutorI} to process {@link com.alibaba.cola.dto.Command} from client.
+ * This package contains {@link CommandExecutorI} and {@link QueryExecutorI} to process {@link com.alibaba.cola.dto.Executor} from client.
  *
  * @author fulan.zjf
  */

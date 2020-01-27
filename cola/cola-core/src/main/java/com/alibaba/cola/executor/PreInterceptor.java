@@ -1,6 +1,6 @@
 package com.alibaba.cola.executor;
 
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
@@ -11,6 +11,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PreInterceptor {
 
-    Class<? extends Command>[] commands() default {};
+    Class<? extends Executor>[] commands() default {};
 
 }

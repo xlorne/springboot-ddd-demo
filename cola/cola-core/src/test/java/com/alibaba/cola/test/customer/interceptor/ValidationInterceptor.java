@@ -2,7 +2,7 @@ package com.alibaba.cola.test.customer.interceptor;
 
 import com.alibaba.cola.executor.ExecutorInterceptorI;
 import com.alibaba.cola.executor.PreInterceptor;
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 import com.alibaba.cola.exception.BizException;
 import com.alibaba.cola.validator.ColaMessageInterpolator;
 import org.hibernate.validator.HibernateValidator;
@@ -26,9 +26,9 @@ public class ValidationInterceptor implements ExecutorInterceptorI {
             .messageInterpolator(new ColaMessageInterpolator()).buildValidatorFactory();
 
     @Override
-    public void preIntercept(Command command) {
+    public void preIntercept(Executor executor) {
         Validator validator = factory.getValidator();
-        Set<ConstraintViolation<Command>> constraintViolations = validator.validate(command);
+        Set<ConstraintViolation<Executor>> constraintViolations = validator.validate(executor);
         constraintViolations.forEach(violation -> {
             throw new BizException(violation.getPropertyPath() + " " + violation.getMessage());
         });

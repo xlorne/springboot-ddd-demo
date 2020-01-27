@@ -10,7 +10,7 @@ package com.alibaba.cola.boot;
 import com.alibaba.cola.executor.*;
 import com.alibaba.cola.common.ApplicationContextHelper;
 import com.alibaba.cola.common.ColaConstant;
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 import com.alibaba.cola.exception.framework.ColaException;
 import com.google.common.collect.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class ExecutorRegister implements RegisterI {
 
     @Override
     public void doRegistration(Class<?> targetClz) {
-        Class<? extends Command> commandClz = getCommandFromExecutor(targetClz);
+        Class<? extends Executor> commandClz = getCommandFromExecutor(targetClz);
         ExecutorInvocation executorInvocation = ApplicationContextHelper.getBean(ExecutorInvocation.class);
         executorInvocation.setCommandExecutor((ExecutorI) ApplicationContextHelper.getBean(targetClz));
         executorInvocation.setPreInterceptors(collectInterceptors(commandClz, true));
@@ -41,13 +41,13 @@ public class ExecutorRegister implements RegisterI {
         executorHub.getCommandRepository().put(commandClz, executorInvocation);
     }
 
-    private Class<? extends Command> getCommandFromExecutor(Class<?> commandExecutorClz) {
+    private Class<? extends Executor> getCommandFromExecutor(Class<?> commandExecutorClz) {
         Method[] methods = commandExecutorClz.getDeclaredMethods();
         for (Method method : methods) {
             if (isExecuteMethod(method)){
                 Class commandClz = checkAndGetCommandParamType(method);
                 executorHub.getResponseRepository().put(commandClz, method.getReturnType());
-                return (Class<? extends Command>) commandClz;
+                return (Class<? extends Executor>) commandClz;
             }
         }
         throw new ColaException(" There is no " + ColaConstant.EXE_METHOD + "() in "+ commandExecutorClz);
@@ -62,13 +62,13 @@ public class ExecutorRegister implements RegisterI {
         if (exeParams.length == 0){
             throw new ColaException("Execute method in "+method.getDeclaringClass()+" should at least have one parameter");
         }
-        if(!Command.class.isAssignableFrom(exeParams[0]) ){
+        if(!Executor.class.isAssignableFrom(exeParams[0]) ){
             throw new ColaException("Execute method in "+method.getDeclaringClass()+" should be the subClass of Command");
         }
         return exeParams[0];
     }
 
-    private Iterable<ExecutorInterceptorI> collectInterceptors(Class<? extends Command> commandClass, boolean pre) {
+    private Iterable<ExecutorInterceptorI> collectInterceptors(Class<? extends Executor> commandClass, boolean pre) {
         /**
          * add 通用的Interceptors
          */
@@ -79,6 +79,6 @@ public class ExecutorRegister implements RegisterI {
 
     @Override
     public Class annotationType() {
-        return Executor.class;
+        return com.alibaba.cola.executor.Executor.class;
     }
 }

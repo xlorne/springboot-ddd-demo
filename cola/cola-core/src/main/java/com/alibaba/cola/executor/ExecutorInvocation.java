@@ -1,6 +1,6 @@
 package com.alibaba.cola.executor;
 
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.exception.framework.ExceptionHandlerFactory;
 import com.alibaba.cola.logger.Logger;
@@ -43,28 +43,28 @@ public class ExecutorInvocation {
         this.postInterceptors = postInterceptors;
     }
 
-    public Response invoke(Command command) {
+    public Response invoke(Executor executor) {
         Response response = null;
         try {
-            preIntercept(command);
-            response = commandExecutor.execute(command);  
+            preIntercept(executor);
+            response = commandExecutor.execute(executor);
         }
         catch(Exception e){
-            response = getResponseInstance(command);
+            response = getResponseInstance(executor);
             response.setSuccess(false);
-            ExceptionHandlerFactory.getExceptionHandler().handleException(command, response, e);
+            ExceptionHandlerFactory.getExceptionHandler().handleException(executor, response, e);
         }
         finally {
             //make sure post interceptors performs even though exception happens
-            postIntercept(command, response);
+            postIntercept(executor, response);
         }          
         return response;
     }
 
-    private void postIntercept(Command command, Response response) {
+    private void postIntercept(Executor executor, Response response) {
         try {
             for (ExecutorInterceptorI postInterceptor : FluentIterable.from(postInterceptors).toSet()) {
-                postInterceptor.postIntercept(command, response);
+                postInterceptor.postIntercept(executor, response);
             }
         }
         catch(Exception e){
@@ -72,13 +72,13 @@ public class ExecutorInvocation {
         }
     }
 
-    private void preIntercept(Command command) {
+    private void preIntercept(Executor executor) {
         for (ExecutorInterceptorI preInterceptor : FluentIterable.from(preInterceptors).toSet()) {
-            preInterceptor.preIntercept(command);
+            preInterceptor.preIntercept(executor);
         }
     }
 
-    private Response getResponseInstance(Command cmd) {
+    private Response getResponseInstance(Executor cmd) {
         Class responseClz = executorHub.getResponseRepository().get(cmd.getClass());
         try {
             return (Response) responseClz.newInstance();

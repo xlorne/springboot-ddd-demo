@@ -2,7 +2,7 @@ package com.alibaba.cola.test.customer.interceptor;
 
 import com.alibaba.cola.executor.ExecutorInterceptorI;
 import com.alibaba.cola.executor.PreInterceptor;
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 
 /**
  * ContextInterceptor
@@ -14,7 +14,7 @@ import com.alibaba.cola.dto.Command;
 public class ContextInterceptor  implements ExecutorInterceptorI {
 
     @Override
-    public void preIntercept(Command command) {
+    public void preIntercept(Executor executor) {
         // TenantContext.set(Constants.TENANT_ID, Constants.BIZ_1);
     }
 }

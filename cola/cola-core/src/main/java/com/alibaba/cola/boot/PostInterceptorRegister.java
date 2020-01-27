@@ -11,7 +11,7 @@ import com.alibaba.cola.executor.ExecutorHub;
 import com.alibaba.cola.executor.ExecutorInterceptorI;
 import com.alibaba.cola.executor.PostInterceptor;
 import com.alibaba.cola.common.ApplicationContextHelper;
-import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.dto.Executor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -31,11 +31,11 @@ public class PostInterceptorRegister extends AbstractRegister {
     public void doRegistration(Class<?> targetClz) {
         ExecutorInterceptorI commandInterceptor = (ExecutorInterceptorI) ApplicationContextHelper.getBean(targetClz);
         PostInterceptor postInterceptorAnn = targetClz.getDeclaredAnnotation(PostInterceptor.class);
-        Class<? extends Command>[] supportClasses = postInterceptorAnn.commands();
+        Class<? extends Executor>[] supportClasses = postInterceptorAnn.commands();
         registerInterceptor(supportClasses, commandInterceptor);        
     }
 
-    private void registerInterceptor(Class<? extends Command>[] supportClasses, ExecutorInterceptorI commandInterceptor) {
+    private void registerInterceptor(Class<? extends Executor>[] supportClasses, ExecutorInterceptorI commandInterceptor) {
         if (null == supportClasses || supportClasses.length == 0) {
             executorHub.getGlobalPostInterceptors().add(commandInterceptor);
             order(executorHub.getGlobalPostInterceptors());
