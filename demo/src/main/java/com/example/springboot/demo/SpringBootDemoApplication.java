@@ -7,17 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@SpringBootApplication
 @MapperScan("com.example.springboot.demo.db.mapper")
-@SpringBootApplication(scanBasePackages = {
-        "com.example.springboot.demo",
-        "com.alibaba.cola",
-        "com.example.springboot.core"})
 public class SpringBootDemoApplication {
 
   public static void main(String[] args) {
@@ -30,6 +27,12 @@ public class SpringBootDemoApplication {
   @PostConstruct
   public void init() {
     initService.init();
+  }
+
+
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
   }
 
 

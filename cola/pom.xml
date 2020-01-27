@@ -31,7 +31,8 @@
 		<module>cola-test</module>
 		<module>cola-common</module>
 		<module>cola-core</module>
-	</modules>
+        <module>cola-starter</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
