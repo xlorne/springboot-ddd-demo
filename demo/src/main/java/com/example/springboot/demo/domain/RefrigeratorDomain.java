@@ -1,9 +1,11 @@
 package com.example.springboot.demo.domain;
 
+import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.db.domain.Refrigerator;
-import com.example.springboot.demo.event.FindRefrigeratorEventHandler;
+import com.example.springboot.demo.presentation.FindRefrigeratorOnlyQueryHandler;
+import com.example.springboot.demo.presentation.dto.RefrigeratorUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -34,15 +36,12 @@ public class RefrigeratorDomain extends DomainObject {
         checkRefrigerator();
         //将大象放进冰箱
         putAnimal();
-        //设置Id
-        setRefrigeratorItemId();
         //发送消息通知
         sendMsg();
     }
 
     private void findSpace() {
-        FindRefrigeratorEventHandler.FindRefrigeratorEvent event = new FindRefrigeratorEventHandler.FindRefrigeratorEvent();
-        refrigerator = (Refrigerator)eventBus.fire(event);
+        refrigerator = (Refrigerator)presentationBus.onlyQuery(FindRefrigeratorOnlyQueryHandler.class);
         log.info("refrigerator=>{}",refrigerator);
     }
 
@@ -59,16 +58,18 @@ public class RefrigeratorDomain extends DomainObject {
         refrigerator.setValue(data);
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
-        eventBus.fire(refrigerator);
+
+        RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorUpdate();
+        refrigeratorUpdate.setRefrigerator(refrigerator);
+        presentationBus.command(refrigeratorUpdate);
+
+        refrigeratorId = refrigeratorUpdate.getRefrigerator().getId();
     }
 
-    private void setRefrigeratorItemId(){
-        refrigeratorId = refrigerator.getId();
-    }
 
     private void sendMsg(){
         MsgReq msgReq = new MsgReq(refrigeratorId,data);
-        MsgRes msgRes = (MsgRes) eventBus.fire(msgReq);
+        MsgRes msgRes = (MsgRes) presentationBus.query(msgReq);
         log.info("send msg=>{}",msgRes);
     }
 

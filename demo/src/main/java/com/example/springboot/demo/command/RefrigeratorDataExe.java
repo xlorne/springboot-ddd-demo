@@ -1,5 +1,6 @@
 package com.example.springboot.demo.command;
 
+import com.alibaba.cola.command.AbsDomainCommandExecutor;
 import com.alibaba.cola.command.Command;
 import com.example.springboot.demo.domain.RefrigeratorDomain;
 import com.example.springboot.demo.pojo.vo.AnimalReq;

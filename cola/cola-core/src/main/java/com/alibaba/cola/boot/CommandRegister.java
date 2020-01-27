@@ -81,4 +81,8 @@ public class CommandRegister implements RegisterI {
         return commandItr;
     }
 
+    @Override
+    public Class annotationType() {
+        return com.alibaba.cola.command.Command.class;
+    }
 }

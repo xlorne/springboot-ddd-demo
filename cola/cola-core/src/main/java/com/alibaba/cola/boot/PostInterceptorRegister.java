@@ -48,4 +48,9 @@ public class PostInterceptorRegister extends AbstractRegister {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+    @Override
+    public Class annotationType() {
+        return PostInterceptor.class;
+    }
 }

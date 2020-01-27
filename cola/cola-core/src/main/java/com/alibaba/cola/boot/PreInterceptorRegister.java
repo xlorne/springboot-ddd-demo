@@ -43,4 +43,9 @@ public class PreInterceptorRegister extends AbstractRegister {
             return;
         }
     }
+
+    @Override
+    public Class annotationType() {
+        return PreInterceptor.class;
+    }
 }

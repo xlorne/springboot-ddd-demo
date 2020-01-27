@@ -1,7 +1,7 @@
-package com.example.springboot.demo.domain;
+package com.alibaba.cola.domain;
 
-import com.alibaba.cola.domain.EntityObject;
 import com.alibaba.cola.event.EventBus;
+import com.alibaba.cola.presentation.PresentationBus;
 
 /**
  * @author lorne
@@ -10,10 +10,16 @@ import com.alibaba.cola.event.EventBus;
  */
 public abstract class DomainObject extends EntityObject {
 
-  EventBus eventBus;
+  protected EventBus eventBus;
+
+  protected PresentationBus presentationBus;
 
   public void initEventBus(EventBus eventBus){
     this.eventBus = eventBus;
+  }
+
+  public void initPresentationBus(PresentationBus presentationBus){
+    this.presentationBus = presentationBus;
   }
 
   public abstract void execute();

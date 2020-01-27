@@ -14,7 +14,10 @@ import java.util.List;
 
 
 @MapperScan("com.example.springboot.demo.db.mapper")
-@SpringBootApplication(scanBasePackages = {"com.example.springboot.demo","com.alibaba.cola"})
+@SpringBootApplication(scanBasePackages = {
+        "com.example.springboot.demo",
+        "com.alibaba.cola",
+        "com.example.springboot.core"})
 public class SpringBootDemoApplication {
 
   public static void main(String[] args) {

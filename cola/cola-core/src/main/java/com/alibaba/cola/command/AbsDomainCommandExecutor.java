@@ -1,10 +1,9 @@
-package com.example.springboot.demo.command;
+package com.alibaba.cola.command;
 
-import com.alibaba.cola.command.CommandExecutorI;
+import com.alibaba.cola.domain.DomainFactoryHelper;
+import com.alibaba.cola.domain.DomainObject;
 import com.alibaba.cola.dto.Command;
 import com.alibaba.cola.dto.Response;
-import com.example.springboot.demo.domain.DomainFactoryHelper;
-import com.example.springboot.demo.domain.DomainObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
