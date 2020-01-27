@@ -2,7 +2,6 @@ package com.alibaba.cola.boot;
 
 import com.alibaba.cola.common.ApplicationContextHelper;
 import com.alibaba.cola.common.ColaConstant;
-import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.exception.framework.ColaException;
 import com.alibaba.cola.repository.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import java.lang.reflect.Method;
 @AllArgsConstructor
 public class RepositoryRegister implements RegisterI {
 
-    private PresentationHub presentationHub;
+    private RepositoryHub repositoryHub;
 
     @Override
     public void doRegistration(Class<?> targetClz) {
@@ -31,19 +30,19 @@ public class RepositoryRegister implements RegisterI {
            if(aInterface.isAssignableFrom(RepositoryCommandHandler.class)){
                Class<? extends RepositoryI> commandPresentation = classParameterCheck.getCommandPresentationFromExecutor();
                RepositoryCommandHandler commandHandler = (RepositoryCommandHandler) ApplicationContextHelper.getBean(targetClz);
-               presentationHub.getPresentationCommandRepository().put(commandPresentation, commandHandler);
+               repositoryHub.getPresentationCommandRepository().put(commandPresentation, commandHandler);
            }
 
            if(aInterface.isAssignableFrom(RepositoryCommandResponseHandler.class)){
                Class<? extends RepositoryI> commandResponsePresentation = classParameterCheck.getCommandResponsePresentationFromExecutor();
                RepositoryCommandResponseHandler commandResponseHandler = (RepositoryCommandResponseHandler) ApplicationContextHelper.getBean(targetClz);
-               presentationHub.getPresentationCommandResponseRepository().put(commandResponsePresentation, commandResponseHandler);
+               repositoryHub.getPresentationCommandResponseRepository().put(commandResponsePresentation, commandResponseHandler);
            }
 
-           if(aInterface.isAssignableFrom(PresentationQueryHandler.class)){
+           if(aInterface.isAssignableFrom(RepositoryQueryHandler.class)){
                Class<? extends RepositoryI> queryPresentation = classParameterCheck.getQueryPresentationFromExecutor();
-               PresentationQueryHandler queryHandler = (PresentationQueryHandler) ApplicationContextHelper.getBean(targetClz);
-               presentationHub.getPresentationQueryRepository().put(queryPresentation, queryHandler);
+               RepositoryQueryHandler queryHandler = (RepositoryQueryHandler) ApplicationContextHelper.getBean(targetClz);
+               repositoryHub.getPresentationQueryRepository().put(queryPresentation, queryHandler);
            }
         }
 
@@ -89,7 +88,7 @@ public class RepositoryRegister implements RegisterI {
         }
 
         private boolean returnTypeIsResponse(Method method){
-            if(!Response.class.isAssignableFrom(method.getReturnType()) ){
+            if(!CmdResponseI.class.isAssignableFrom(method.getReturnType()) ){
                 throw new ColaException("Execute method in "+method.getReturnType()+" should be the return type of Response");
             }
             return true;

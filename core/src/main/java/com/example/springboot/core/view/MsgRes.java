@@ -1,6 +1,6 @@
 package com.example.springboot.core.view;
 
-import com.alibaba.cola.dto.Response;
+import com.alibaba.cola.repository.CmdResponseI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgRes extends Response {
+public class MsgRes implements CmdResponseI {
 
     private long time;
 }

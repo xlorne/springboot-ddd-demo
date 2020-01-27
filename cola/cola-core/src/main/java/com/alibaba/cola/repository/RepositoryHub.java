@@ -13,14 +13,14 @@ import java.util.Map;
  * @description
  */
 @Component
-public class PresentationHub {
+public class RepositoryHub {
 
 
     @Getter
     private Map<Class<? extends RepositoryI>, RepositoryCommandHandler> presentationCommandRepository = new HashMap<>();
 
     @Getter
-    private Map<Class<? extends RepositoryI>, PresentationQueryHandler> presentationQueryRepository = new HashMap<>();
+    private Map<Class<? extends RepositoryI>, RepositoryQueryHandler> presentationQueryRepository = new HashMap<>();
 
     @Getter
     private Map<Class<? extends RepositoryI>, RepositoryCommandResponseHandler> presentationCommandResponseRepository = new HashMap<>();
@@ -44,8 +44,8 @@ public class PresentationHub {
     }
 
 
-    public PresentationQueryHandler getQueryPresentationHandler(Class<? extends RepositoryI> presentationClass) {
-        PresentationQueryHandler presentationHandler = presentationQueryRepository.get(presentationClass);
+    public RepositoryQueryHandler getQueryPresentationHandler(Class<? extends RepositoryI> presentationClass) {
+        RepositoryQueryHandler presentationHandler = presentationQueryRepository.get(presentationClass);
         if (presentationHandler == null ) {
             throw new ColaException(presentationClass + "is not registered in presentationHub, please register first");
         }

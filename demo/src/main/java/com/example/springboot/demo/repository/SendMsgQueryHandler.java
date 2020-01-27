@@ -1,7 +1,7 @@
 package com.example.springboot.demo.repository;
 
 import com.alibaba.cola.repository.RepositoryHandler;
-import com.alibaba.cola.repository.PresentationQueryHandler;
+import com.alibaba.cola.repository.RepositoryQueryHandler;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.feign.MessageClient;
@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
  */
 @RepositoryHandler
 @AllArgsConstructor
-public class SendMsgQueryHandler implements PresentationQueryHandler<MsgReq,MsgRes> {
+public class SendMsgQueryHandler implements RepositoryQueryHandler<MsgRes,MsgReq> {
 
     private MessageClient messageClient;
 

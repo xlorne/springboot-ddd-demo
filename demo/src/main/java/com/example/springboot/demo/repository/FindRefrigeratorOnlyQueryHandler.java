@@ -1,7 +1,7 @@
 package com.example.springboot.demo.repository;
 
 import com.alibaba.cola.repository.RepositoryHandler;
-import com.alibaba.cola.repository.PresentationOnlyQueryHandler;
+import com.alibaba.cola.repository.RepositoryOnlyQueryHandler;
 import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.db.mapper.RefrigeratorQuery;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
  */
 @RepositoryHandler
 @AllArgsConstructor
-public class FindRefrigeratorOnlyQueryHandler implements PresentationOnlyQueryHandler<Refrigerator> {
+public class FindRefrigeratorOnlyQueryHandler implements RepositoryOnlyQueryHandler<Refrigerator> {
 
     private RefrigeratorQuery refrigeratorQuery;
 
