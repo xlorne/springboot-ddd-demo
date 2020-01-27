@@ -7,10 +7,7 @@
  */
 package com.alibaba.cola.boot;
 
-import com.alibaba.cola.command.CommandExecutorI;
-import com.alibaba.cola.command.CommandHub;
-import com.alibaba.cola.command.CommandInterceptorI;
-import com.alibaba.cola.command.CommandInvocation;
+import com.alibaba.cola.executor.*;
 import com.alibaba.cola.common.ApplicationContextHelper;
 import com.alibaba.cola.common.ColaConstant;
 import com.alibaba.cola.dto.Command;
@@ -33,16 +30,16 @@ public class CommandRegister implements RegisterI {
 
     @Autowired
 
-    private CommandHub         commandHub;
+    private ExecutorHub executorHub;
 
     @Override
     public void doRegistration(Class<?> targetClz) {
         Class<? extends Command> commandClz = getCommandFromExecutor(targetClz);
-        CommandInvocation commandInvocation = ApplicationContextHelper.getBean(CommandInvocation.class);
-        commandInvocation.setCommandExecutor((CommandExecutorI) ApplicationContextHelper.getBean(targetClz));
-        commandInvocation.setPreInterceptors(collectInterceptors(commandClz, true));
-        commandInvocation.setPostInterceptors(collectInterceptors(commandClz, false));
-        commandHub.getCommandRepository().put(commandClz, commandInvocation);
+        ExecutorInvocation executorInvocation = ApplicationContextHelper.getBean(ExecutorInvocation.class);
+        executorInvocation.setCommandExecutor((ExecutorI) ApplicationContextHelper.getBean(targetClz));
+        executorInvocation.setPreInterceptors(collectInterceptors(commandClz, true));
+        executorInvocation.setPostInterceptors(collectInterceptors(commandClz, false));
+        executorHub.getCommandRepository().put(commandClz, executorInvocation);
     }
 
     private Class<? extends Command> getCommandFromExecutor(Class<?> commandExecutorClz) {
@@ -50,7 +47,7 @@ public class CommandRegister implements RegisterI {
         for (Method method : methods) {
             if (isExecuteMethod(method)){
                 Class commandClz = checkAndGetCommandParamType(method);
-                commandHub.getResponseRepository().put(commandClz, method.getReturnType());
+                executorHub.getResponseRepository().put(commandClz, method.getReturnType());
                 return (Class<? extends Command>) commandClz;
             }
         }
@@ -72,17 +69,17 @@ public class CommandRegister implements RegisterI {
         return exeParams[0];
     }
 
-    private Iterable<CommandInterceptorI> collectInterceptors(Class<? extends Command> commandClass, boolean pre) {
+    private Iterable<ExecutorInterceptorI> collectInterceptors(Class<? extends Command> commandClass, boolean pre) {
         /**
          * add 通用的Interceptors
          */
-        Iterable<CommandInterceptorI> commandItr = Iterables.concat((pre ? commandHub.getGlobalPreInterceptors() : commandHub.getGlobalPostInterceptors()));
+        Iterable<ExecutorInterceptorI> commandItr = Iterables.concat((pre ? executorHub.getGlobalPreInterceptors() : executorHub.getGlobalPostInterceptors()));
 
         return commandItr;
     }
 
     @Override
     public Class annotationType() {
-        return com.alibaba.cola.command.Command.class;
+        return Executor.class;
     }
 }

@@ -1,4 +1,4 @@
-package com.alibaba.cola.command;
+package com.alibaba.cola.executor;
 
 import com.alibaba.cola.dto.Command;
 import com.alibaba.cola.dto.Response;
@@ -8,7 +8,7 @@ import com.alibaba.cola.dto.Response;
  * 
  * @author fulan.zjf 2017年10月25日 下午4:04:43
  */
-public interface CommandInterceptorI {
+public interface ExecutorInterceptorI {
    
    /**
     * Pre-processing before command execution

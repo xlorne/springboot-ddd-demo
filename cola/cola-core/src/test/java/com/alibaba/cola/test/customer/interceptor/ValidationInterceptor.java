@@ -1,7 +1,7 @@
 package com.alibaba.cola.test.customer.interceptor;
 
-import com.alibaba.cola.command.CommandInterceptorI;
-import com.alibaba.cola.command.PreInterceptor;
+import com.alibaba.cola.executor.ExecutorInterceptorI;
+import com.alibaba.cola.executor.PreInterceptor;
 import com.alibaba.cola.dto.Command;
 import com.alibaba.cola.exception.BizException;
 import com.alibaba.cola.validator.ColaMessageInterpolator;
@@ -19,7 +19,7 @@ import java.util.Set;
  * @author Frank Zhang 2018-01-06 8:27 PM
  */
 @PreInterceptor
-public class ValidationInterceptor implements CommandInterceptorI {
+public class ValidationInterceptor implements ExecutorInterceptorI {
 
     //Enable fail fast, which will improve performance
     private ValidatorFactory factory = Validation.byProvider(HibernateValidator.class).configure().failFast(true)

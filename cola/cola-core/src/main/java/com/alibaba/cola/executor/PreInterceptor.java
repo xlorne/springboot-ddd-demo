@@ -1,4 +1,4 @@
-package com.alibaba.cola.command;
+package com.alibaba.cola.executor;
 
 import com.alibaba.cola.dto.Command;
 import org.springframework.stereotype.Component;

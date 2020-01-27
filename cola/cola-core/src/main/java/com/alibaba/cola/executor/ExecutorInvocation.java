@@ -1,4 +1,4 @@
-package com.alibaba.cola.command;
+package com.alibaba.cola.executor;
 
 import com.alibaba.cola.dto.Command;
 import com.alibaba.cola.dto.Response;
@@ -17,27 +17,27 @@ import java.util.List;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class CommandInvocation{
+public class ExecutorInvocation {
 
-    private static Logger logger = LoggerFactory.getLogger(CommandInvocation.class);
+    private static Logger logger = LoggerFactory.getLogger(ExecutorInvocation.class);
 
     @Setter
-    private CommandExecutorI commandExecutor;
+    private ExecutorI commandExecutor;
     @Setter
-    private Iterable<CommandInterceptorI> preInterceptors;
+    private Iterable<ExecutorInterceptorI> preInterceptors;
     @Setter
-    private Iterable<CommandInterceptorI> postInterceptors;
+    private Iterable<ExecutorInterceptorI> postInterceptors;
 
     @Autowired
-    private CommandHub commandHub;
+    private ExecutorHub executorHub;
 
 
-    public CommandInvocation() {
+    public ExecutorInvocation() {
         
     }
     
-    public CommandInvocation(CommandExecutorI commandExecutor, List<CommandInterceptorI> preInterceptors,
-                             List<CommandInterceptorI> postInterceptors){
+    public ExecutorInvocation(ExecutorI commandExecutor, List<ExecutorInterceptorI> preInterceptors,
+                              List<ExecutorInterceptorI> postInterceptors){
         this.commandExecutor = commandExecutor;
         this.preInterceptors = preInterceptors;
         this.postInterceptors = postInterceptors;
@@ -63,7 +63,7 @@ public class CommandInvocation{
 
     private void postIntercept(Command command, Response response) {
         try {
-            for (CommandInterceptorI postInterceptor : FluentIterable.from(postInterceptors).toSet()) {
+            for (ExecutorInterceptorI postInterceptor : FluentIterable.from(postInterceptors).toSet()) {
                 postInterceptor.postIntercept(command, response);
             }
         }
@@ -73,13 +73,13 @@ public class CommandInvocation{
     }
 
     private void preIntercept(Command command) {
-        for (CommandInterceptorI preInterceptor : FluentIterable.from(preInterceptors).toSet()) {
+        for (ExecutorInterceptorI preInterceptor : FluentIterable.from(preInterceptors).toSet()) {
             preInterceptor.preIntercept(command);
         }
     }
 
     private Response getResponseInstance(Command cmd) {
-        Class responseClz = commandHub.getResponseRepository().get(cmd.getClass());
+        Class responseClz = executorHub.getResponseRepository().get(cmd.getClass());
         try {
             return (Response) responseClz.newInstance();
         } catch (Exception e) {

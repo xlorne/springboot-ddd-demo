@@ -1,6 +1,6 @@
 package com.example.springboot.demo.service.impl;
 
-import com.alibaba.cola.command.CommandBus;
+import com.alibaba.cola.executor.ExecutorBus;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DemoServiceImpl implements DemoService {
 
 
-  private CommandBus commandBus;
+  private ExecutorBus executorBus;
 
   /**
    * 将大象放进冰箱
@@ -30,7 +30,7 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public AnimalRes put(AnimalReq req) throws Exception {
-    return (AnimalRes) commandBus.send(req);
+    return (AnimalRes) executorBus.send(req);
   }
 
 }

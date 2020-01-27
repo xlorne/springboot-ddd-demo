@@ -1,4 +1,4 @@
-package com.alibaba.cola.command;
+package com.alibaba.cola.executor;
 
 import com.alibaba.cola.domain.DomainFactoryHelper;
 import com.alibaba.cola.domain.DomainObject;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2020/1/26
  * @description
  */
-public abstract class AbsDomainCommandExecutor<R extends Response, C extends Command> implements CommandExecutorI<R,C> {
+public abstract class AbsDomainExecutor<R extends Response, C extends Command> implements ExecutorI<R,C> {
 
     @Autowired
     protected DomainFactoryHelper domainFactoryHelper;

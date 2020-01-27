@@ -1,6 +1,6 @@
 package com.alibaba.cola.test.customer;
 
-import com.alibaba.cola.command.CommandBusI;
+import com.alibaba.cola.executor.ExecutorBusI;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerServiceI{
 
     @Autowired
-    private CommandBusI commandBus;
+    private ExecutorBusI commandBus;
 
     @Override
     public Response addCustomer(AddCustomerCmd addCustomerCmd) {
