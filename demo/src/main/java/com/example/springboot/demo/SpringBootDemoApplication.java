@@ -1,6 +1,5 @@
 package com.example.springboot.demo;
 
-import com.alibaba.cola.boot.Bootstrap;
 import com.example.springboot.demo.service.InitService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @MapperScan("com.example.springboot.demo.db.mapper")
@@ -35,14 +32,5 @@ public class SpringBootDemoApplication {
     return new RestTemplate();
   }
 
-
-  @Bean(initMethod = "init")
-  public Bootstrap bootstrap() {
-    Bootstrap bootstrap = new Bootstrap();
-    List<String> packagesToScan  = new ArrayList<>();
-    packagesToScan.add("com.example.springboot.demo");
-    bootstrap.setPackages(packagesToScan);
-    return bootstrap;
-  }
 
 }
