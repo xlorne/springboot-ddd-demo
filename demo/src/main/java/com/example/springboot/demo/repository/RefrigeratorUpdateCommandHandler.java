@@ -1,9 +1,9 @@
-package com.example.springboot.demo.presentation;
+package com.example.springboot.demo.repository;
 
-import com.alibaba.cola.presentation.PresentationCommandHandler;
-import com.alibaba.cola.presentation.PresentationHandler;
+import com.alibaba.cola.repository.RepositoryCommandHandler;
+import com.alibaba.cola.repository.RepositoryHandler;
 import com.example.springboot.demo.db.mapper.RefrigeratorMapper;
-import com.example.springboot.demo.presentation.dto.RefrigeratorUpdate;
+import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
 import lombok.AllArgsConstructor;
 
 /**
@@ -11,9 +11,9 @@ import lombok.AllArgsConstructor;
  * @date 2020/1/27
  * @description
  */
-@PresentationHandler
+@RepositoryHandler
 @AllArgsConstructor
-public class RefrigeratorUpdateCommandHandler implements PresentationCommandHandler<RefrigeratorUpdate> {
+public class RefrigeratorUpdateCommandHandler implements RepositoryCommandHandler<RefrigeratorUpdate> {
 
     private RefrigeratorMapper refrigeratorMapper;
 

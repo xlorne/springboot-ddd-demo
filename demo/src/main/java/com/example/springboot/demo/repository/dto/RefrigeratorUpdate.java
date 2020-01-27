@@ -1,6 +1,6 @@
-package com.example.springboot.demo.presentation.dto;
+package com.example.springboot.demo.repository.dto;
 
-import com.alibaba.cola.presentation.PresentationI;
+import com.alibaba.cola.repository.RepositoryI;
 import com.example.springboot.demo.db.domain.Refrigerator;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
  * @description
  */
 @Data
-public class RefrigeratorUpdate implements PresentationI {
+public class RefrigeratorUpdate implements RepositoryI {
 
     private Refrigerator refrigerator;
 

@@ -2,7 +2,7 @@ package com.alibaba.cola.domain;
 
 
 import com.alibaba.cola.event.EventBus;
-import com.alibaba.cola.presentation.PresentationBus;
+import com.alibaba.cola.repository.RepositoryBus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class DomainFactoryHelper<T extends DomainObject> implements DomainObject
 
     private EventBus eventBus;
 
-    private PresentationBus presentationBus;
+    private RepositoryBus repositoryBus;
 
     @Override
     public T create(Class<T> clazz,Object ... initargs) {
@@ -36,7 +36,7 @@ public class DomainFactoryHelper<T extends DomainObject> implements DomainObject
         try {
             DomainObject domain = clazz.getDeclaredConstructor(parameterTypes).newInstance(initargs);
             domain.initEventBus(eventBus);
-            domain.initPresentationBus(presentationBus);
+            domain.initPresentationBus(repositoryBus);
             return (T)domain;
         } catch (InstantiationException | IllegalAccessException |
                 InvocationTargetException | NoSuchMethodException e) {

@@ -1,7 +1,7 @@
-package com.example.springboot.demo.presentation;
+package com.example.springboot.demo.repository;
 
-import com.alibaba.cola.presentation.PresentationHandler;
-import com.alibaba.cola.presentation.PresentationOnlyQueryHandler;
+import com.alibaba.cola.repository.RepositoryHandler;
+import com.alibaba.cola.repository.PresentationOnlyQueryHandler;
 import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.db.mapper.RefrigeratorQuery;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
  * @date 2020/1/23
  * @description
  */
-@PresentationHandler
+@RepositoryHandler
 @AllArgsConstructor
 public class FindRefrigeratorOnlyQueryHandler implements PresentationOnlyQueryHandler<Refrigerator> {
 

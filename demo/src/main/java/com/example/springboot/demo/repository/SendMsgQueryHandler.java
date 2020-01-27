@@ -1,7 +1,7 @@
-package com.example.springboot.demo.presentation;
+package com.example.springboot.demo.repository;
 
-import com.alibaba.cola.presentation.PresentationHandler;
-import com.alibaba.cola.presentation.PresentationQueryHandler;
+import com.alibaba.cola.repository.RepositoryHandler;
+import com.alibaba.cola.repository.PresentationQueryHandler;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.feign.MessageClient;
@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
  * @date 2020/1/23
  * @description
  */
-@PresentationHandler
+@RepositoryHandler
 @AllArgsConstructor
 public class SendMsgQueryHandler implements PresentationQueryHandler<MsgReq,MsgRes> {
 

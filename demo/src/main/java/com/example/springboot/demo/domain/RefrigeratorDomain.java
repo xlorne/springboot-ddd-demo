@@ -4,8 +4,8 @@ import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.core.view.MsgReq;
 import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.db.domain.Refrigerator;
-import com.example.springboot.demo.presentation.FindRefrigeratorOnlyQueryHandler;
-import com.example.springboot.demo.presentation.dto.RefrigeratorUpdate;
+import com.example.springboot.demo.repository.FindRefrigeratorOnlyQueryHandler;
+import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -41,7 +41,7 @@ public class RefrigeratorDomain extends DomainObject {
     }
 
     private void findSpace() {
-        refrigerator = (Refrigerator)presentationBus.onlyQuery(FindRefrigeratorOnlyQueryHandler.class);
+        refrigerator = (Refrigerator) repositoryBus.onlyQuery(FindRefrigeratorOnlyQueryHandler.class);
         log.info("refrigerator=>{}",refrigerator);
     }
 
@@ -61,7 +61,7 @@ public class RefrigeratorDomain extends DomainObject {
 
         RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorUpdate();
         refrigeratorUpdate.setRefrigerator(refrigerator);
-        presentationBus.command(refrigeratorUpdate);
+        repositoryBus.command(refrigeratorUpdate);
 
         refrigeratorId = refrigeratorUpdate.getRefrigerator().getId();
     }
@@ -69,7 +69,7 @@ public class RefrigeratorDomain extends DomainObject {
 
     private void sendMsg(){
         MsgReq msgReq = new MsgReq(refrigeratorId,data);
-        MsgRes msgRes = (MsgRes) presentationBus.query(msgReq);
+        MsgRes msgRes = (MsgRes) repositoryBus.query(msgReq);
         log.info("send msg=>{}",msgRes);
     }
 

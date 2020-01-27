@@ -1,11 +1,11 @@
 package com.alibaba.cola.boot;
 
 import com.alibaba.cola.common.ApplicationContextHelper;
+import com.alibaba.cola.common.ColaConstant;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.exception.framework.ColaException;
-import com.alibaba.cola.presentation.*;
+import com.alibaba.cola.repository.*;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -17,15 +17,9 @@ import java.lang.reflect.Method;
  */
 @Component
 @AllArgsConstructor
-@Slf4j
-public class PresentationRegister implements RegisterI {
+public class RepositoryRegister implements RegisterI {
 
     private PresentationHub presentationHub;
-
-    private final static String commandMethod = "command";
-
-    private final static String queryMethod = "query";
-
 
     @Override
     public void doRegistration(Class<?> targetClz) {
@@ -34,20 +28,20 @@ public class PresentationRegister implements RegisterI {
        Class<?>[] interfaces = targetClz.getInterfaces();
        for(Class<?> aInterface:interfaces){
 
-           if(aInterface.isAssignableFrom(PresentationCommandHandler.class)){
-               Class<? extends PresentationI> commandPresentation = classParameterCheck.getCommandPresentationFromExecutor();
-               PresentationCommandHandler commandHandler = (PresentationCommandHandler) ApplicationContextHelper.getBean(targetClz);
+           if(aInterface.isAssignableFrom(RepositoryCommandHandler.class)){
+               Class<? extends RepositoryI> commandPresentation = classParameterCheck.getCommandPresentationFromExecutor();
+               RepositoryCommandHandler commandHandler = (RepositoryCommandHandler) ApplicationContextHelper.getBean(targetClz);
                presentationHub.getPresentationCommandRepository().put(commandPresentation, commandHandler);
            }
 
-           if(aInterface.isAssignableFrom(PresentationCommandResponseHandler.class)){
-               Class<? extends PresentationI> commandResponsePresentation = classParameterCheck.getCommandResponsePresentationFromExecutor();
-               PresentationCommandResponseHandler commandResponseHandler = (PresentationCommandResponseHandler) ApplicationContextHelper.getBean(targetClz);
+           if(aInterface.isAssignableFrom(RepositoryCommandResponseHandler.class)){
+               Class<? extends RepositoryI> commandResponsePresentation = classParameterCheck.getCommandResponsePresentationFromExecutor();
+               RepositoryCommandResponseHandler commandResponseHandler = (RepositoryCommandResponseHandler) ApplicationContextHelper.getBean(targetClz);
                presentationHub.getPresentationCommandResponseRepository().put(commandResponsePresentation, commandResponseHandler);
            }
 
            if(aInterface.isAssignableFrom(PresentationQueryHandler.class)){
-               Class<? extends PresentationI> queryPresentation = classParameterCheck.getQueryPresentationFromExecutor();
+               Class<? extends RepositoryI> queryPresentation = classParameterCheck.getQueryPresentationFromExecutor();
                PresentationQueryHandler queryHandler = (PresentationQueryHandler) ApplicationContextHelper.getBean(targetClz);
                presentationHub.getPresentationQueryRepository().put(queryPresentation, queryHandler);
            }
@@ -57,10 +51,10 @@ public class PresentationRegister implements RegisterI {
 
     @Override
     public Class annotationType() {
-        return PresentationHandler.class;
+        return RepositoryHandler.class;
     }
 
-    class ClassParameterCheck{
+    private class ClassParameterCheck{
         Class<?> targetClz;
         Method[] methods;
 
@@ -88,7 +82,7 @@ public class PresentationRegister implements RegisterI {
 
         private boolean parameter0IsPresentationI(Method method){
             Class<?>[] exeParams = method.getParameterTypes();
-            if(!PresentationI.class.isAssignableFrom(exeParams[0]) ){
+            if(!RepositoryI.class.isAssignableFrom(exeParams[0]) ){
                 throw new ColaException("Execute method in "+method.getDeclaringClass()+" should be the subClass of PresentationI");
             }
             return true;
@@ -106,7 +100,7 @@ public class PresentationRegister implements RegisterI {
             return exeParams[0];
         }
 
-        Class<? extends PresentationI> getCommandResponsePresentationFromExecutor(){
+        Class<? extends RepositoryI> getCommandResponsePresentationFromExecutor(){
             for (Method method : methods) {
                 if (isCommandMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method) && returnTypeIsResponse(method)){
                     return getPresentationI(method);
@@ -115,7 +109,7 @@ public class PresentationRegister implements RegisterI {
             throw new ColaException("Event param in " + targetClz + " command() is not detected");
         }
 
-        Class<? extends PresentationI> getQueryPresentationFromExecutor(){
+        Class<? extends RepositoryI> getQueryPresentationFromExecutor(){
             for (Method method : methods) {
                 if (isQueryMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method) && returnTypeIsResponse(method)){
                     return getPresentationI(method);
@@ -124,7 +118,7 @@ public class PresentationRegister implements RegisterI {
             throw new ColaException("Event param in " + targetClz + " command() is not detected");
         }
 
-        Class<? extends PresentationI> getCommandPresentationFromExecutor(){
+        Class<? extends RepositoryI> getCommandPresentationFromExecutor(){
             for (Method method : methods) {
                 if (isCommandMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method)){
                     return getPresentationI(method);
@@ -135,17 +129,14 @@ public class PresentationRegister implements RegisterI {
 
 
         private boolean isCommandMethod(Method method){
-            return commandMethod.equals(method.getName()) && !method.isBridge();
+            return ColaConstant.COMMAND_METHOD.equals(method.getName()) && !method.isBridge();
         }
 
         private boolean isQueryMethod(Method method){
-            return queryMethod.equals(method.getName()) && !method.isBridge();
+            return ColaConstant.QUERY_METHOD.equals(method.getName()) && !method.isBridge();
         }
 
 
     }
-
-
-
 
 }

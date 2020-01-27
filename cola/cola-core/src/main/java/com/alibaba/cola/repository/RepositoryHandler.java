@@ -1,4 +1,4 @@
-package com.alibaba.cola.presentation;
+package com.alibaba.cola.repository;
 
 import org.springframework.stereotype.Component;
 
@@ -13,6 +13,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Component
-public @interface PresentationHandler {
+public @interface RepositoryHandler {
 
 }

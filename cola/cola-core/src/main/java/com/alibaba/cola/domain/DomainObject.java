@@ -1,7 +1,7 @@
 package com.alibaba.cola.domain;
 
 import com.alibaba.cola.event.EventBus;
-import com.alibaba.cola.presentation.PresentationBus;
+import com.alibaba.cola.repository.RepositoryBus;
 
 /**
  * @author lorne
@@ -12,14 +12,14 @@ public abstract class DomainObject extends EntityObject {
 
   protected EventBus eventBus;
 
-  protected PresentationBus presentationBus;
+  protected RepositoryBus repositoryBus;
 
   public void initEventBus(EventBus eventBus){
     this.eventBus = eventBus;
   }
 
-  public void initPresentationBus(PresentationBus presentationBus){
-    this.presentationBus = presentationBus;
+  public void initPresentationBus(RepositoryBus repositoryBus){
+    this.repositoryBus = repositoryBus;
   }
 
   public abstract void execute();
