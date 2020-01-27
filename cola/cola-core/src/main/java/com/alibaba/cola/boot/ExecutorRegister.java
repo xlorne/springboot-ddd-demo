@@ -26,10 +26,9 @@ import java.lang.reflect.Method;
  */
 
 @Component
-public class CommandRegister implements RegisterI {
+public class ExecutorRegister implements RegisterI {
 
     @Autowired
-
     private ExecutorHub executorHub;
 
     @Override
