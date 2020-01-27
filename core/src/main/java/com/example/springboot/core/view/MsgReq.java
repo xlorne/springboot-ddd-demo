@@ -1,6 +1,6 @@
 package com.example.springboot.core.view;
 
-import com.alibaba.cola.repository.RepositoryI;
+import com.alibaba.cola.repository.CommandI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgReq implements RepositoryI {
+public class MsgReq implements CommandI {
 
     private long refrigeratorId;
 

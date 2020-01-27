@@ -10,23 +10,20 @@ import java.util.Map;
 /**
  * @author lorne
  * @date 2020/1/27
- * @description
  */
 @Component
 public class RepositoryHub {
 
+    @Getter
+    private Map<Class<? extends CommandI>, RepositoryCommandHandler> presentationCommandRepository = new HashMap<>();
 
     @Getter
-    private Map<Class<? extends RepositoryI>, RepositoryCommandHandler> presentationCommandRepository = new HashMap<>();
+    private Map<Class<? extends CommandI>, RepositoryQueryHandler> presentationQueryRepository = new HashMap<>();
 
     @Getter
-    private Map<Class<? extends RepositoryI>, RepositoryQueryHandler> presentationQueryRepository = new HashMap<>();
+    private Map<Class<? extends CommandI>, RepositoryCommandResponseHandler> presentationCommandResponseRepository = new HashMap<>();
 
-    @Getter
-    private Map<Class<? extends RepositoryI>, RepositoryCommandResponseHandler> presentationCommandResponseRepository = new HashMap<>();
-
-
-    public RepositoryCommandResponseHandler getCommandResponsePresentationHandler(Class<? extends RepositoryI> presentationClass) {
+    public RepositoryCommandResponseHandler getCommandResponsePresentationHandler(Class<? extends CommandI> presentationClass) {
         RepositoryCommandResponseHandler presentationHandler = presentationCommandResponseRepository.get(presentationClass);
         if (presentationHandler == null ) {
             throw new ColaException(presentationClass + "is not registered in presentationHub, please register first");
@@ -34,8 +31,7 @@ public class RepositoryHub {
         return presentationHandler;
     }
 
-
-    public RepositoryCommandHandler getCommandPresentationHandler(Class<? extends RepositoryI> presentationClass) {
+    public RepositoryCommandHandler getCommandPresentationHandler(Class<? extends CommandI> presentationClass) {
         RepositoryCommandHandler presentationHandler = presentationCommandRepository.get(presentationClass);
         if (presentationHandler == null ) {
             throw new ColaException(presentationClass + "is not registered in presentationHub, please register first");
@@ -43,8 +39,7 @@ public class RepositoryHub {
         return presentationHandler;
     }
 
-
-    public RepositoryQueryHandler getQueryPresentationHandler(Class<? extends RepositoryI> presentationClass) {
+    public RepositoryQueryHandler getQueryPresentationHandler(Class<? extends CommandI> presentationClass) {
         RepositoryQueryHandler presentationHandler = presentationQueryRepository.get(presentationClass);
         if (presentationHandler == null ) {
             throw new ColaException(presentationClass + "is not registered in presentationHub, please register first");

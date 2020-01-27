@@ -28,19 +28,19 @@ public class RepositoryRegister implements RegisterI {
        for(Class<?> aInterface:interfaces){
 
            if(aInterface.isAssignableFrom(RepositoryCommandHandler.class)){
-               Class<? extends RepositoryI> commandPresentation = classParameterCheck.getCommandPresentationFromExecutor();
+               Class<? extends CommandI> commandPresentation = classParameterCheck.getCommandPresentationFromExecutor();
                RepositoryCommandHandler commandHandler = (RepositoryCommandHandler) ApplicationContextHelper.getBean(targetClz);
                repositoryHub.getPresentationCommandRepository().put(commandPresentation, commandHandler);
            }
 
            if(aInterface.isAssignableFrom(RepositoryCommandResponseHandler.class)){
-               Class<? extends RepositoryI> commandResponsePresentation = classParameterCheck.getCommandResponsePresentationFromExecutor();
+               Class<? extends CommandI> commandResponsePresentation = classParameterCheck.getCommandResponsePresentationFromExecutor();
                RepositoryCommandResponseHandler commandResponseHandler = (RepositoryCommandResponseHandler) ApplicationContextHelper.getBean(targetClz);
                repositoryHub.getPresentationCommandResponseRepository().put(commandResponsePresentation, commandResponseHandler);
            }
 
            if(aInterface.isAssignableFrom(RepositoryQueryHandler.class)){
-               Class<? extends RepositoryI> queryPresentation = classParameterCheck.getQueryPresentationFromExecutor();
+               Class<? extends CommandI> queryPresentation = classParameterCheck.getQueryPresentationFromExecutor();
                RepositoryQueryHandler queryHandler = (RepositoryQueryHandler) ApplicationContextHelper.getBean(targetClz);
                repositoryHub.getPresentationQueryRepository().put(queryPresentation, queryHandler);
            }
@@ -81,7 +81,7 @@ public class RepositoryRegister implements RegisterI {
 
         private boolean parameter0IsPresentationI(Method method){
             Class<?>[] exeParams = method.getParameterTypes();
-            if(!RepositoryI.class.isAssignableFrom(exeParams[0]) ){
+            if(!CommandI.class.isAssignableFrom(exeParams[0]) ){
                 throw new ColaException("Execute method in "+method.getDeclaringClass()+" should be the subClass of PresentationI");
             }
             return true;
@@ -99,7 +99,7 @@ public class RepositoryRegister implements RegisterI {
             return exeParams[0];
         }
 
-        Class<? extends RepositoryI> getCommandResponsePresentationFromExecutor(){
+        Class<? extends CommandI> getCommandResponsePresentationFromExecutor(){
             for (Method method : methods) {
                 if (isCommandMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method) && returnTypeIsResponse(method)){
                     return getPresentationI(method);
@@ -108,7 +108,7 @@ public class RepositoryRegister implements RegisterI {
             throw new ColaException("Event param in " + targetClz + " command() is not detected");
         }
 
-        Class<? extends RepositoryI> getQueryPresentationFromExecutor(){
+        Class<? extends CommandI> getQueryPresentationFromExecutor(){
             for (Method method : methods) {
                 if (isQueryMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method) && returnTypeIsResponse(method)){
                     return getPresentationI(method);
@@ -117,7 +117,7 @@ public class RepositoryRegister implements RegisterI {
             throw new ColaException("Event param in " + targetClz + " command() is not detected");
         }
 
-        Class<? extends RepositoryI> getCommandPresentationFromExecutor(){
+        Class<? extends CommandI> getCommandPresentationFromExecutor(){
             for (Method method : methods) {
                 if (isCommandMethod(method)&&hasParameter(method) && parameter0IsPresentationI(method)){
                     return getPresentationI(method);

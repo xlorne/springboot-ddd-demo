@@ -2,9 +2,9 @@ package com.alibaba.cola.repository;
 
 
 /**
- * @author lorne
- * @date 2020/1/27
- * @description
+ * This is Repository pattern which decouples the data access from concrete data tunnels.
+ *
+ * @author fulan.zjf 2017年10月27日 上午11:07:26
  */
 public interface RepositoryHandlerI {
 

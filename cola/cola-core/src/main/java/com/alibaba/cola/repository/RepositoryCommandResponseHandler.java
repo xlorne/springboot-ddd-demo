@@ -6,9 +6,9 @@ package com.alibaba.cola.repository;
  * @date 2020/1/27
  * @description
  */
-public interface RepositoryCommandResponseHandler<Res extends CmdResponseI,Req extends RepositoryI>
+public interface RepositoryCommandResponseHandler<R extends CmdResponseI,C extends CommandI>
         extends RepositoryHandlerI {
 
-    Res command(Req request);
+    R command(C command);
 
 }

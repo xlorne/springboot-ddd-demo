@@ -5,8 +5,8 @@ package com.alibaba.cola.repository;
  * @date 2020/1/27
  * @description
  */
-public interface RepositoryQueryHandler<Res extends CmdResponseI,Req extends RepositoryI> extends RepositoryHandlerI {
+public interface RepositoryQueryHandler<R extends CmdResponseI,C extends CommandI> extends RepositoryHandlerI {
 
-    Res query(Req request);
+    R query(C command);
 
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * @author lorne
  * @date 2020/1/27
- * @description
  */
 @Component
 @AllArgsConstructor
@@ -15,12 +14,12 @@ public class RepositoryBus {
 
     private RepositoryHub repositoryHub;
 
-    public void command(RepositoryI presentation){
+    public void command(CommandI presentation){
         RepositoryCommandHandler presentationHandler =  repositoryHub.getCommandPresentationHandler(presentation.getClass());
         presentationHandler.command(presentation);
     }
 
-    public CmdResponseI query(RepositoryI presentation){
+    public CmdResponseI query(CommandI presentation){
         RepositoryQueryHandler presentationHandler =  repositoryHub.getQueryPresentationHandler(presentation.getClass());
         return presentationHandler.query(presentation);
     }
@@ -30,7 +29,7 @@ public class RepositoryBus {
         return presentationHandler.query();
     }
 
-    public CmdResponseI commandResponse(RepositoryI presentation){
+    public CmdResponseI commandResponse(CommandI presentation){
         RepositoryCommandResponseHandler presentationHandler =  repositoryHub.getCommandResponsePresentationHandler(presentation.getClass());
         return presentationHandler.command(presentation);
     }

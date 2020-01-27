@@ -14,7 +14,7 @@ public class Refrigerator  implements CmdResponseI {
   /**
    * 冰箱格栅编号
    */
-  private int id;
+  private Long id;
 
   /**
    * 存放的物品

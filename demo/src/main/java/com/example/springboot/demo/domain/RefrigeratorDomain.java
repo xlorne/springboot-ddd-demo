@@ -1,8 +1,6 @@
 package com.example.springboot.demo.domain;
 
 import com.alibaba.cola.domain.DomainObject;
-import com.example.springboot.core.view.MsgReq;
-import com.example.springboot.core.view.MsgRes;
 import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.FindRefrigeratorOnlyQueryHandler;
 import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
@@ -21,7 +19,7 @@ public class RefrigeratorDomain extends DomainObject {
     private String data;
 
     private Refrigerator refrigerator;
-    private long refrigeratorId;
+    private Long refrigeratorId;
 
     public RefrigeratorDomain(String data) {
         this.data = data;
@@ -68,9 +66,8 @@ public class RefrigeratorDomain extends DomainObject {
 
 
     private void sendMsg(){
-        MsgReq msgReq = new MsgReq(refrigeratorId,data);
-        MsgRes msgRes = (MsgRes) repositoryBus.query(msgReq);
-        log.info("send msg=>{}",msgRes);
+       MsgDomain msgDomain = createDomain(MsgDomain.class,refrigeratorId,data);
+       msgDomain.sendMsg();
     }
 
     public long getId() {
