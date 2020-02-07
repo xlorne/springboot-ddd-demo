@@ -1,4 +1,4 @@
-package com.example.springboot.demo.domain;
+package com.example.springboot.demo.domain.model;
 
 import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.core.view.MsgReq;
@@ -21,14 +21,11 @@ public class MsgDomain extends DomainObject {
         this.data = data;
     }
 
-    @Override
-    public void execute() {
-        sendMsg();
-    }
 
     public void sendMsg(){
         MsgReq msgReq = new MsgReq(refrigeratorId,data);
         MsgRes msgRes = repositoryBus.execute(msgReq);
         log.info("send msg=>{}",msgRes);
     }
+
 }

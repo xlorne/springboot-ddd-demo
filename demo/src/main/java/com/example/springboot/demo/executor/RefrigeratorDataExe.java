@@ -1,8 +1,9 @@
 package com.example.springboot.demo.executor;
 
-import com.alibaba.cola.executor.AbsDomainExecutor;
 import com.alibaba.cola.executor.Executor;
-import com.example.springboot.demo.domain.RefrigeratorDomain;
+import com.alibaba.cola.executor.ExecutorI;
+import com.example.springboot.demo.domain.model.MsgDomain;
+import com.example.springboot.demo.domain.model.RefrigeratorDomain;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 
@@ -12,12 +13,18 @@ import com.example.springboot.demo.pojo.vo.AnimalRes;
  * @description
  */
 @Executor
-public class RefrigeratorDataExe extends AbsDomainExecutor<AnimalRes, AnimalReq> {
+public class RefrigeratorDataExe implements ExecutorI<AnimalRes, AnimalReq> {
 
     @Override
     public AnimalRes execute(AnimalReq cmd) {
-        RefrigeratorDomain refrigeratorDomain = createDomainAndExecute(RefrigeratorDomain.class,cmd.getName());
-        return AnimalRes.ok(refrigeratorDomain.getId());
+
+        RefrigeratorDomain refrigeratorDomain = new RefrigeratorDomain();
+        refrigeratorDomain.putAnimal(cmd.getName());
+
+        MsgDomain msgDomain = new MsgDomain(refrigeratorDomain.getRefrigeratorId(),cmd.getName());
+        msgDomain.sendMsg();
+
+        return AnimalRes.ok(refrigeratorDomain.getRefrigeratorId());
     }
 
 }

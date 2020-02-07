@@ -1,4 +1,4 @@
-package com.example.springboot.demo.domain;
+package com.example.springboot.demo.domain.model;
 
 import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.demo.db.domain.Refrigerator;
@@ -15,32 +15,14 @@ import java.util.Date;
 @Slf4j
 public class RefrigeratorDomain extends DomainObject {
 
-    private String data;
-
     private Refrigerator refrigerator;
-    private Long refrigeratorId;
 
-    public RefrigeratorDomain(String data) {
-        this.data = data;
-    }
-
-
-    @Override
-    public void execute() {
-        //找一个空位置
-        findSpace();
-        //检查位置是否可用
-        checkRefrigerator();
-        //将大象放进冰箱
-        putAnimal();
-        //发送消息通知
-        sendMsg();
-    }
-
-    private void findSpace() {
+    public RefrigeratorDomain() {
         refrigerator = repositoryBus.execute(new RefrigeratorHandler.RefrigeratorFindSpace());
         log.info("refrigerator=>{}",refrigerator);
+        checkRefrigerator();
     }
+
 
     private void checkRefrigerator(){
         if (refrigerator == null) {
@@ -51,7 +33,7 @@ public class RefrigeratorDomain extends DomainObject {
     /**
      * 保存动物到冰箱
      */
-    private void putAnimal() {
+    public void putAnimal(String data) {
         refrigerator.setValue(data);
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
@@ -59,17 +41,11 @@ public class RefrigeratorDomain extends DomainObject {
         RefrigeratorHandler.RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorHandler.RefrigeratorUpdate();
         refrigeratorUpdate.setRefrigerator(refrigerator);
         repositoryBus.command(refrigeratorUpdate);
+    }
 
-        refrigeratorId = refrigeratorUpdate.getRefrigerator().getId();
+    public Long getRefrigeratorId() {
+        return refrigerator.getId();
     }
 
 
-    private void sendMsg(){
-       MsgDomain msgDomain = createDomain(MsgDomain.class,refrigeratorId,data);
-       msgDomain.sendMsg();
-    }
-
-    public long getId() {
-        return refrigeratorId;
-    }
 }
