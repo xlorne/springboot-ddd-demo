@@ -39,7 +39,7 @@ public class RefrigeratorDomain extends DomainObject {
     }
 
     private void findSpace() {
-        refrigerator = (Refrigerator) repositoryBus.command(new RefrigeratorFindSpace());
+        refrigerator = repositoryBus.execute(new RefrigeratorFindSpace());
         log.info("refrigerator=>{}",refrigerator);
     }
 

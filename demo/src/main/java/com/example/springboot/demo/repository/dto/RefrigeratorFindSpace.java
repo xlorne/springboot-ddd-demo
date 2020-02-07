@@ -1,6 +1,7 @@
 package com.example.springboot.demo.repository.dto;
 
 import com.alibaba.cola.repository.CommandI;
+import com.example.springboot.demo.db.domain.Refrigerator;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
  * @description
  */
 @Data
-public class RefrigeratorFindSpace implements CommandI {
+public class RefrigeratorFindSpace implements CommandI<Refrigerator> {
 
     @Override
     public String command() {

@@ -28,7 +28,7 @@ public class MsgDomain extends DomainObject {
 
     public void sendMsg(){
         MsgReq msgReq = new MsgReq(refrigeratorId,data);
-        MsgRes msgRes = (MsgRes) repositoryBus.command(msgReq);
+        MsgRes msgRes = repositoryBus.execute(msgReq);
         log.info("send msg=>{}",msgRes);
     }
 }

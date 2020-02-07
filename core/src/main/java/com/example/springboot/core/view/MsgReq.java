@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgReq implements CommandI {
+public class MsgReq implements CommandI<MsgRes> {
 
     private long refrigeratorId;
 
@@ -23,4 +23,5 @@ public class MsgReq implements CommandI {
     public String command() {
         return "send";
     }
+
 }
