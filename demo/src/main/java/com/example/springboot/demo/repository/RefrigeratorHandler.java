@@ -1,13 +1,13 @@
 package com.example.springboot.demo.repository;
 
+import com.alibaba.cola.repository.CommandI;
 import com.alibaba.cola.repository.RepositoryHandler;
 import com.alibaba.cola.repository.RepositoryHandlerI;
 import com.example.springboot.demo.db.domain.Refrigerator;
 import com.example.springboot.demo.db.mapper.RefrigeratorMapper;
 import com.example.springboot.demo.db.mapper.RefrigeratorQuery;
-import com.example.springboot.demo.repository.dto.RefrigeratorFindSpace;
-import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  * @author lorne
@@ -28,6 +28,29 @@ public class RefrigeratorHandler implements RepositoryHandlerI {
 
     public Refrigerator findSpace(RefrigeratorFindSpace refrigeratorFindSpace){
         return refrigeratorQuery.findSpace();
+    }
+
+
+    @Data
+    public static class RefrigeratorUpdate implements CommandI {
+
+        private Refrigerator refrigerator;
+
+        @Override
+        public String command() {
+            return "update";
+        }
+    }
+
+    @Data
+    public static class RefrigeratorFindSpace implements CommandI<Refrigerator> {
+
+        @Override
+        public String command() {
+            return "findSpace";
+        }
+
+
     }
 
 }

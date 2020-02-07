@@ -2,8 +2,7 @@ package com.example.springboot.demo.domain;
 
 import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.demo.db.domain.Refrigerator;
-import com.example.springboot.demo.repository.dto.RefrigeratorFindSpace;
-import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
+import com.example.springboot.demo.repository.RefrigeratorHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -39,7 +38,7 @@ public class RefrigeratorDomain extends DomainObject {
     }
 
     private void findSpace() {
-        refrigerator = repositoryBus.execute(new RefrigeratorFindSpace());
+        refrigerator = repositoryBus.execute(new RefrigeratorHandler.RefrigeratorFindSpace());
         log.info("refrigerator=>{}",refrigerator);
     }
 
@@ -57,7 +56,7 @@ public class RefrigeratorDomain extends DomainObject {
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
 
-        RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorUpdate();
+        RefrigeratorHandler.RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorHandler.RefrigeratorUpdate();
         refrigeratorUpdate.setRefrigerator(refrigerator);
         repositoryBus.command(refrigeratorUpdate);
 
