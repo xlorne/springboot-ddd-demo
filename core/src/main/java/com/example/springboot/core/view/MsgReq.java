@@ -18,4 +18,9 @@ public class MsgReq implements CommandI {
     private long refrigeratorId;
 
     private String data;
+
+    @Override
+    public String command() {
+        return "send";
+    }
 }

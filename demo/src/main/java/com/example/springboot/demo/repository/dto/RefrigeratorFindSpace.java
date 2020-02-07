@@ -1,7 +1,6 @@
 package com.example.springboot.demo.repository.dto;
 
 import com.alibaba.cola.repository.CommandI;
-import com.example.springboot.demo.db.domain.Refrigerator;
 import lombok.Data;
 
 /**
@@ -10,13 +9,11 @@ import lombok.Data;
  * @description
  */
 @Data
-public class RefrigeratorUpdate implements CommandI {
-
-    private Refrigerator refrigerator;
+public class RefrigeratorFindSpace implements CommandI {
 
     @Override
     public String command() {
-        return "update";
+        return "findSpace";
     }
 
 

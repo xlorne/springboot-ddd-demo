@@ -1,6 +1,5 @@
 package com.example.springboot.demo.db.domain;
 
-import com.alibaba.cola.repository.CmdResponseI;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,7 +8,7 @@ import java.util.Date;
  * 这是一个大号的冰箱，也可以理解成为一个冰库
  */
 @Data
-public class Refrigerator  implements CmdResponseI {
+public class Refrigerator {
 
   /**
    * 冰箱格栅编号

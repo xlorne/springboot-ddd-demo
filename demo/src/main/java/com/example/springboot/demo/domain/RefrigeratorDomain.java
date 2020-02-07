@@ -2,7 +2,7 @@ package com.example.springboot.demo.domain;
 
 import com.alibaba.cola.domain.DomainObject;
 import com.example.springboot.demo.db.domain.Refrigerator;
-import com.example.springboot.demo.repository.FindRefrigeratorOnlyQueryHandler;
+import com.example.springboot.demo.repository.dto.RefrigeratorFindSpace;
 import com.example.springboot.demo.repository.dto.RefrigeratorUpdate;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +39,7 @@ public class RefrigeratorDomain extends DomainObject {
     }
 
     private void findSpace() {
-        refrigerator = (Refrigerator) repositoryBus.onlyQuery(FindRefrigeratorOnlyQueryHandler.class);
+        refrigerator = (Refrigerator) repositoryBus.command(new RefrigeratorFindSpace());
         log.info("refrigerator=>{}",refrigerator);
     }
 
