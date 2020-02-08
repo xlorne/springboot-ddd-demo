@@ -13,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MsgDomain extends DomainObject {
 
-    private Long refrigeratorId;
-    private String data;
+    private final Long refrigeratorId;
+    private final String data;
 
     public MsgDomain(Long refrigeratorId, String data) {
         this.refrigeratorId = refrigeratorId;

@@ -1,5 +1,6 @@
 package com.example.springboot.demo.service;
 
+import com.example.springboot.demo.pojo.command.AnimalReqData;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 

@@ -1,6 +1,9 @@
 package com.example.springboot.demo.service.impl;
 
 import com.alibaba.cola.executor.ExecutorBus;
+import com.example.springboot.demo.convertor.AnimalResConvertor;
+import com.example.springboot.demo.pojo.command.AnimalReqCommand;
+import com.example.springboot.demo.pojo.command.AnimalReqData;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
@@ -30,7 +33,9 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public AnimalRes put(AnimalReq req) throws Exception {
-    return (AnimalRes) executorBus.send(req);
+    AnimalReqCommand animalReqCommand = new AnimalReqCommand(req);
+    AnimalReqData animalReqData =  executorBus.send(animalReqCommand);
+    return AnimalResConvertor.parser(animalReqData);
   }
 
 }

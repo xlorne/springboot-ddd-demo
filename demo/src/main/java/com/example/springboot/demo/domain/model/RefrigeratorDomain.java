@@ -1,8 +1,9 @@
 package com.example.springboot.demo.domain.model;
 
 import com.alibaba.cola.domain.DomainObject;
-import com.example.springboot.demo.db.domain.Refrigerator;
-import com.example.springboot.demo.repository.RefrigeratorHandler;
+import com.example.springboot.demo.repository.db.domain.Refrigerator;
+import com.example.springboot.demo.repository.handler.RefrigeratorHandler;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -15,10 +16,11 @@ import java.util.Date;
 @Slf4j
 public class RefrigeratorDomain extends DomainObject {
 
-    private Refrigerator refrigerator;
+    @Getter
+    private final Refrigerator refrigerator;
 
     public RefrigeratorDomain() {
-        refrigerator = repositoryBus.execute(new RefrigeratorHandler.RefrigeratorFindSpace());
+        refrigerator = repositoryBus.execute(new RefrigeratorHandler.FindSpaceCmd());
         log.info("refrigerator=>{}",refrigerator);
         checkRefrigerator();
     }
@@ -38,14 +40,12 @@ public class RefrigeratorDomain extends DomainObject {
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
 
-        RefrigeratorHandler.RefrigeratorUpdate refrigeratorUpdate = new RefrigeratorHandler.RefrigeratorUpdate();
-        refrigeratorUpdate.setRefrigerator(refrigerator);
-        repositoryBus.command(refrigeratorUpdate);
+        RefrigeratorHandler.UpdateCmd updateCmd = new RefrigeratorHandler.UpdateCmd();
+        updateCmd.setRefrigerator(refrigerator);
+        repositoryBus.command(updateCmd);
     }
 
-    public Long getRefrigeratorId() {
-        return refrigerator.getId();
-    }
+
 
 
 }

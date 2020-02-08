@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@MapperScan("com.example.springboot.demo.db.mapper")
+@MapperScan("com.example.springboot.demo.repository.db.mapper")
 public class SpringBootDemoApplication {
 
   public static void main(String[] args) {

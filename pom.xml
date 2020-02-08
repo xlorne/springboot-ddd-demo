@@ -7,7 +7,6 @@
         <module>demo</module>
         <module>message</module>
         <module>core</module>
-        <module>cola</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

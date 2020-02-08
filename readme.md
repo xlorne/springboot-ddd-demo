@@ -8,11 +8,20 @@
  
 ## 系统介绍
 
+本项目依赖COLA，运行本项目前需要先将COLA安装到本地。源码维护见: https://github.com/1991wangliang/COLA    
+
+![COLA架构图](img/cola.png)
+
 层次介绍:    
-Controller    负责完成对数据的非业务性校验，Controller层直接调用Service层。    
-Service       负责完成业务的实现，项目在前期比较没有特别复杂的逻辑时候，可以先通过Service直接实现业务(业务代码在100行以内)，代码量增加就需要考虑采用领域模型来处理业务了。    
-Domain        负责领域业务处理，领域模型将随着业务的不断扩展而不断的下沉抽离，前期的领域可能不能算做是严格意义上的领域，可算作为业务步骤抽离。   
-DB            负责数据操作，为了将来的维护优化可将读写分离。    
+
+controller 做为接口的调用和数据的校验。    
+convertor  做数据的适配转换。    
+domain     领域分为model和service    
+executor   业务执行的command命令，这一层将来会随着业务的复杂而通过阶段步骤做拆分。   
+feign      第三方的调用   
+pojo       数据dto对象   
+repository 定义了资源的handler   
+service    业务处理service                   
 
 本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。    
 
