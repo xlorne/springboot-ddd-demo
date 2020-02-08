@@ -14,14 +14,15 @@
 
 层次介绍:    
 
-controller 做为接口的调用和数据的校验。    
-convertor  做数据的适配转换。    
-domain     领域分为model和service    
-executor   业务执行的command命令，这一层将来会随着业务的复杂而通过阶段步骤做拆分。   
-feign      第三方的调用   
-pojo       数据dto对象   
-repository 定义了资源的handler   
-service    业务处理service                   
+* controller  做为接口的调用和数据的校验。    
+* service     业务处理service           
+* convertor   做数据的适配转换。         
+* executor    业务执行的command命令，这一层将来会随着业务的复杂而通过阶段步骤做拆分。    
+* domain      领域分为model和service     
+* pojo        数据dto对象，command/vo/cmd        
+* feign       第三方的调用       
+* repository  资源的操作        
+            
 
 本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。    
 
