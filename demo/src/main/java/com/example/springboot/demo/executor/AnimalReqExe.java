@@ -18,7 +18,7 @@ public class AnimalReqExe implements ExecutorI<AnimalReqData, AnimalReqCommand> 
     @Override
     public AnimalReqData execute(AnimalReqCommand cmd) {
 
-        String name = cmd.getAnimalReq().getName();
+        String name = cmd.getName();
 
         RefrigeratorDomain refrigeratorDomain = new RefrigeratorDomain();
         refrigeratorDomain.putAnimal(name);

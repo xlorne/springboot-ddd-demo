@@ -20,7 +20,7 @@ public class RefrigeratorDomain extends DomainObject {
     private final Refrigerator refrigerator;
 
     public RefrigeratorDomain() {
-        refrigerator = repositoryBus.execute(new RefrigeratorHandler.FindSpaceCmd());
+        refrigerator = repository(RefrigeratorHandler.class).findSpace();
         log.info("refrigerator=>{}",refrigerator);
         checkRefrigerator();
     }
@@ -40,9 +40,9 @@ public class RefrigeratorDomain extends DomainObject {
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
 
-        RefrigeratorHandler.UpdateCmd updateCmd = new RefrigeratorHandler.UpdateCmd();
-        updateCmd.setRefrigerator(refrigerator);
-        repositoryBus.command(updateCmd);
+        RefrigeratorHandler updateHandler = repository(RefrigeratorHandler.class);
+        updateHandler.update(refrigerator);
+
     }
 
 

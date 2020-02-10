@@ -1,56 +1,32 @@
 package com.example.springboot.demo.repository.handler;
 
-import com.alibaba.cola.repository.CommandI;
 import com.alibaba.cola.repository.RepositoryHandler;
 import com.alibaba.cola.repository.RepositoryHandlerI;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.db.mapper.RefrigeratorMapper;
 import com.example.springboot.demo.repository.db.mapper.RefrigeratorQuery;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 
 /**
  * @author lorne
- * @date 2020/1/27
+ * @date 2020/2/9
  * @description
  */
-@RepositoryHandler
 @AllArgsConstructor
+@RepositoryHandler
 public class RefrigeratorHandler implements RepositoryHandlerI {
 
     private RefrigeratorMapper refrigeratorMapper;
 
     private RefrigeratorQuery refrigeratorQuery;
 
-    public void update(UpdateCmd updateCmd) {
-        refrigeratorMapper.updateValue(updateCmd.getRefrigerator());
+    public void update(Refrigerator refrigerator) {
+        refrigeratorMapper.updateValue(refrigerator);
     }
 
-    public Refrigerator findSpace(FindSpaceCmd findSpaceCmd){
+    public Refrigerator findSpace(){
         return refrigeratorQuery.findSpace();
     }
-
-
-    @Data
-    public static class UpdateCmd implements CommandI {
-
-        private Refrigerator refrigerator;
-
-        @Override
-        public String command() {
-            return "update";
-        }
-    }
-
-    @Data
-    public static class FindSpaceCmd implements CommandI<Refrigerator> {
-
-        @Override
-        public String command() {
-            return "findSpace";
-        }
-
-
-    }
+    
 
 }

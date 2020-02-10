@@ -33,7 +33,7 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public AnimalRes put(AnimalReq req) throws Exception {
-    AnimalReqCommand animalReqCommand = new AnimalReqCommand(req);
+    AnimalReqCommand animalReqCommand = new AnimalReqCommand(req.getName());
     AnimalReqData animalReqData =  executorBus.send(animalReqCommand);
     return AnimalResConvertor.parser(animalReqData);
   }

@@ -9,18 +9,17 @@ import lombok.AllArgsConstructor;
 
 /**
  * @author lorne
- * @date 2020/1/23
+ * @date 2020/2/9
  * @description
  */
-@RepositoryHandler
 @AllArgsConstructor
-public class MessageClientHandler implements RepositoryHandlerI{
+@RepositoryHandler
+public class MessageClientHandler implements RepositoryHandlerI {
 
     private MessageClient messageClient;
 
     public MsgRes send(MsgReq request) {
         return messageClient.send(request);
     }
-
 
 }

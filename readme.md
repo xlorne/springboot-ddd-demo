@@ -12,18 +12,19 @@
 
 ![COLA架构图](img/cola.png)
 
-层次介绍:    
+层次介绍:      
 
-* controller  做为接口的调用和数据的校验。    
-* service     业务处理service           
-* convertor   做数据的适配转换。         
-* executor    业务执行的command命令，这一层将来会随着业务的复杂而通过阶段步骤做拆分。    
-* domain      领域分为model和service     
-* pojo        数据dto对象，command/vo/cmd        
-* feign       第三方的调用       
-* repository  资源的操作        
-            
-
+|  层次    | 解释  |
+|  :----  | :----  |
+| controller  |  提供服务的访问层，目前采用RestController的方式，也做基础数据格式的校验。  |
+| service  |  业务适配调用层，这里的service与三层架构差别较大，该service主要是为调用domain而做的适配  |
+| convertor  | 数据的适配转换，适配层的存在也是为了避免各层次间的强依赖，如command将不直接依赖vo对象，通过convertor适配 |
+| executor  | 业务逻辑的编排与执行，这才是关键业务的处理地方。对于复杂的业务可通过`@Phase`,`@Step`将业务在按照步骤做细化拆分 |
+| domain  | 洋葱核心:领域层，domain领域分为model与service(action) model领域的final是数据，service是动作 |
+| pojo  | 数据dto对象，分为command/vo/co/ao... 等不同的dto对象  |
+| feign  | 模拟的第三方的调用，严格来说隶属于repository层  |
+| repository  | 资源层相对来说比较广泛，最基本的是对db的操作，对其他模块的操作(feign)，对搜索引擎或消息队列的操作都属于资源。可细分为:feign、db、search、message  | 
+          
 本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。    
 
 ## 关于敏捷开发

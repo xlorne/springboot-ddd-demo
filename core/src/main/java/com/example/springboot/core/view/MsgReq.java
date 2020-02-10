@@ -1,6 +1,5 @@
 package com.example.springboot.core.view;
 
-import com.alibaba.cola.repository.CommandI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,15 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgReq implements CommandI<MsgRes> {
+public class MsgReq  {
 
     private long refrigeratorId;
 
     private String data;
-
-    @Override
-    public String command() {
-        return "send";
-    }
 
 }

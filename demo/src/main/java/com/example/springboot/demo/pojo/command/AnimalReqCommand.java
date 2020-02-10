@@ -1,7 +1,6 @@
 package com.example.springboot.demo.pojo.command;
 
 import com.alibaba.cola.dto.Executor;
-import com.example.springboot.demo.pojo.vo.AnimalReq;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,5 +13,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class AnimalReqCommand extends Executor<AnimalReqData> {
 
-    private AnimalReq animalReq;
+    private String name;
 }
