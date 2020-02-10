@@ -14,18 +14,28 @@
 
 层次介绍:      
 
-|  层次    | 解释  |
+|  层次    | 说明  |
 |  :----  | :----  |
-| controller  |  提供服务的访问层，目前采用RestController的方式，也做基础数据格式的校验。  |
-| service  |  业务适配调用层，这里的service与三层架构差别较大，该service主要是为调用domain而做的适配  |
-| convertor  | 数据的适配转换，适配层的存在也是为了避免各层次间的强依赖，如command将不直接依赖vo对象，通过convertor适配 |
-| executor  | 业务逻辑的编排与执行，这才是关键业务的处理地方。对于复杂的业务可通过`@Phase`,`@Step`将业务在按照步骤做细化拆分 |
-| domain  | 洋葱核心:领域层，domain领域分为model与service(action) model领域的final是数据，service是动作 |
+| controller  |  提供服务的访问层，目前采用RestController的方式，也做基础数据格式校验的业务。  |
+| service  |  业务适配调用层，这与三层架构的业务层差别较大，该service主要是做对vo数据的适配处理以及executor层的协调调用。 |
+| convertor  | 适配层，适配层的存在也是为了避免各层次间的强依赖,为了更清新的划分清楚层次，如command对象将不直接依赖vo对象，而是通过convertor或构造数据做适配 |
+| executor  | 具体业务命令的逻辑编排与执行，这是业务逻辑处理的关键地方。|
+| domain  | 洋葱图的核心部分:领域层，domain领域分为model与service(action),model领域的final是数据，service是动作 |
 | pojo  | 数据dto对象，分为command/vo/co/ao... 等不同的dto对象  |
 | feign  | 模拟的第三方的调用，严格来说隶属于repository层  |
 | repository  | 资源层相对来说比较广泛，最基本的是对db的操作，对其他模块的操作(feign)，对搜索引擎或消息队列的操作都属于资源。可细分为:feign、db、search、message  | 
-          
-本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。    
+            
+本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。     
+
+### 关于领域的理解  
+A: 比如用户领域(UserDomain)具体是指什么？        
+Q: 用户领域将会锁定对某一个用户的操作，这个用户往往通过构造是创建指定。UserDomain的代码也是围绕对这个User对象的操作，这就是用户领域。   
+
+A: UserDomain与UserMapper(UserDao)什么差异？   
+Q: 谈到对用户的操作，大家往往想到UserMapper(UserDao)，实际上他们的差异还是比较大，从操作数据层面来讲UserDomain都是固定对某一个用户的操作，而非对用户表数据的操作，UserDao是对User表的所有数据的操作。从使用层面来说UserDomain是通过构造器创建，而UserMapper或UserDao往往都是直接注入使用。从他们两者关系上来说，UserDomain对资源操作时需要借助UserDao来完成数据操作。   
+
+A: 关于Domain命名规范有什么讲究？   
+Q: 先说Model层面的领域如何定义。比如如何区分 UserDomain、UserListDomain，他们之间的差异就是操作数据上的差异，UserDomain是对某一个User的Domain，UserListDomain是对List<User>的Domain. 再就是service(action)层的领域命名，这一块往往以动作来命名，比如CreateOrderDomain,SaveUserDomain. 
 
 ## 关于敏捷开发
 敏捷开发的关键是：阶段性发布可用功能版本，长期持续的推进项目进度。其实还是比较好理解的，但是如何才能做好呢？实际上很多项目的研发过程就像是在垒扑克牌，一对一对的垒，越垒越高，在垒到足够高的时候，去调整一个小功能时却导致了整盘的倒塌，敏捷并不是做好项目的根本。
