@@ -20,9 +20,9 @@
 | service  |  业务适配调用层，这与三层架构的业务层差别较大，该service主要是做对vo数据的适配处理以及executor层的协调调用。 |
 | convertor  | 适配层，适配层的存在也是为了避免各层次间的强依赖,为了更清新的划分清楚层次，如command对象将不直接依赖vo对象，而是通过convertor或构造数据做适配 |
 | executor  | 具体业务命令的逻辑编排与执行，这是业务逻辑处理的关键地方。|
+| extension  | 业务扩展层，可扩展多种业务实现，COLA提供了全局的策略规范。 |
 | domain  | 洋葱图的核心部分:领域层，domain领域分为model与service(action),model领域的final是数据，service是动作 |
 | pojo  | 数据dto对象，分为command/vo/co/ao... 等不同的dto对象  |
-| feign  | 模拟的第三方的调用，严格来说隶属于repository层  |
 | repository  | 资源层相对来说比较广泛，最基本的是对db的操作，对其他模块的操作(feign)，对搜索引擎或消息队列的操作都属于资源。可细分为:feign、db、search、message  | 
             
 本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。     

@@ -1,6 +1,7 @@
 package com.example.springboot.demo.domain.model;
 
 import com.alibaba.cola.domain.DomainObject;
+import com.example.springboot.demo.extension.RefrigeratorUpdateExtPt;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.handler.RefrigeratorHandler;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class RefrigeratorDomain extends DomainObject {
 
     @Getter
     private final Refrigerator refrigerator;
+
 
     public RefrigeratorDomain() {
         refrigerator = repository(RefrigeratorHandler.class).findSpace();
@@ -40,8 +42,10 @@ public class RefrigeratorDomain extends DomainObject {
         refrigerator.setTime(new Date());
         //放进大象 对应操作是将大象存到冰箱空间里面
 
-        RefrigeratorHandler updateHandler = repository(RefrigeratorHandler.class);
-        updateHandler.update(refrigerator);
+        extensionExecutor.executeVoid(
+                RefrigeratorUpdateExtPt.class,
+                getBizScenario(),
+                (extension)-> extension.update(refrigerator));
 
     }
 

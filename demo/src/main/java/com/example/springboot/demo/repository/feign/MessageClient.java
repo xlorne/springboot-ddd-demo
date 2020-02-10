@@ -1,7 +1,7 @@
-package com.example.springboot.demo.feign;
+package com.example.springboot.demo.repository.feign;
 
-import com.example.springboot.core.view.MsgReq;
-import com.example.springboot.core.view.MsgRes;
+import com.example.springboot.client.ao.MsgReq;
+import com.example.springboot.client.ao.MsgRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

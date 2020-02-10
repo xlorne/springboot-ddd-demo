@@ -1,12 +1,11 @@
 package com.example.springboot.demo.service.impl;
 
-import com.example.springboot.demo.feign.MessageClient;
+import com.example.springboot.demo.repository.feign.MessageClient;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 import com.example.springboot.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockingDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

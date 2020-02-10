@@ -10,17 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <artifactId>core</artifactId>
-    <name>core</name>
+    <artifactId>client</artifactId>
+    <name>client</name>
     <version>0.0.1-SNAPSHOT</version>
-    <description>core</description>
-    <dependencies>
-        <dependency>
-            <groupId>com.alibaba.cola</groupId>
-            <artifactId>cola-core</artifactId>
-            <version>2.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+
+    <description>client</description>
+
 
 </project>

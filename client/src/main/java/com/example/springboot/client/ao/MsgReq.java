@@ -1,4 +1,4 @@
-package com.example.springboot.core.view;
+package com.example.springboot.client.ao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgRes  {
+public class MsgReq  {
 
-    private long time;
+    private long refrigeratorId;
+
+    private String data;
+
 }

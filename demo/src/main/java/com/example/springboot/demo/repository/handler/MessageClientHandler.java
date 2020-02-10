@@ -2,9 +2,9 @@ package com.example.springboot.demo.repository.handler;
 
 import com.alibaba.cola.repository.RepositoryHandler;
 import com.alibaba.cola.repository.RepositoryHandlerI;
-import com.example.springboot.core.view.MsgReq;
-import com.example.springboot.core.view.MsgRes;
-import com.example.springboot.demo.feign.MessageClient;
+import com.example.springboot.client.ao.MsgReq;
+import com.example.springboot.client.ao.MsgRes;
+import com.example.springboot.demo.repository.feign.MessageClient;
 import lombok.AllArgsConstructor;
 
 /**
