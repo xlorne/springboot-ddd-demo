@@ -108,7 +108,7 @@ Q: 先说Model层面的领域如何定义。比如如何区分 UserDomain、User
 
 ## 遵守的原则
 
-http://c.biancheng.net/view/1317.html
+[软件设计模式概述](http://c.biancheng.net/view/1317.html)
 
 ### 开闭原则的定义
 开闭原则（Open Closed Principle，OCP）由勃兰特·梅耶（Bertrand Meyer）提出，他在 1988 年的著作《面向对象软件构造》（Object Oriented Software Construction）中提出：软件实体应当对扩展开放，对修改关闭（Software entities should be open for extension，but closed for modification），这就是开闭原则的经典定义。    
