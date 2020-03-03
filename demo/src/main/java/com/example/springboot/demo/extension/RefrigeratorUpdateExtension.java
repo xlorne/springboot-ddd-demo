@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
  * @date 2020/2/10
  * @description
  */
-@Extension(bizId = ExtensionConstants.biz,useCase = ExtensionConstants.useCase,scenario = ExtensionConstants.scenario)
+@Extension(bizId = ExtensionConstants.biz, useCase = ExtensionConstants.useCase, scenario = ExtensionConstants.scenario)
 @AllArgsConstructor
 public class RefrigeratorUpdateExtension implements RefrigeratorUpdateExtPt {
 

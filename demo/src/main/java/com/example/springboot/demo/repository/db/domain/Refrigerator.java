@@ -10,25 +10,25 @@ import java.util.Date;
 @Data
 public class Refrigerator {
 
-  /**
-   * 冰箱格栅编号
-   */
-  private Long id;
+    /**
+     * 冰箱格栅编号
+     */
+    private Long id;
 
-  /**
-   * 存放的物品
-   */
-  private String value;
+    /**
+     * 存放的物品
+     */
+    private String value;
 
-  /**
-   * 更新时间
-   */
-  private Date time;
+    /**
+     * 更新时间
+     */
+    private Date time;
 
-  /**
-   * 状态 0空 1满
-   */
-  private int state;
+    /**
+     * 状态 0空 1满
+     */
+    private int state;
 
 
 }

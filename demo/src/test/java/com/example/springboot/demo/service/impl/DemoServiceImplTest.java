@@ -1,8 +1,8 @@
 package com.example.springboot.demo.service.impl;
 
-import com.example.springboot.demo.repository.feign.MessageClient;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
+import com.example.springboot.demo.repository.feign.MessageClient;
 import com.example.springboot.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -26,9 +26,9 @@ class DemoServiceImplTest {
     void put() throws Exception {
         AnimalReq animalReq = new AnimalReq();
         animalReq.setName("大象");
-        AnimalRes animalRes =  demoService.put(animalReq);
-        Assert.isTrue(animalRes.getId()>0,"保存失败.");
-        log.info("res=>{}",animalRes);
+        AnimalRes animalRes = demoService.put(animalReq);
+        Assert.isTrue(animalRes.getId() > 0, "保存失败.");
+        log.info("res=>{}", animalRes);
     }
 
 }

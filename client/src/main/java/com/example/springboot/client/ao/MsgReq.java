@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MsgReq  {
+public class MsgReq {
 
     private long refrigeratorId;
 

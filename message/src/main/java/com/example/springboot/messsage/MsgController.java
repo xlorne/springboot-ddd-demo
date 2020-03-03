@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MsgController {
 
     @PostMapping("/send")
-    public MsgRes send(@RequestBody MsgReq msgReq){
-        log.info("msg->{}",msgReq);
+    public MsgRes send(@RequestBody MsgReq msgReq) {
+        log.info("msg->{}", msgReq);
         return new MsgRes(System.currentTimeMillis());
     }
 

@@ -1,6 +1,5 @@
 package com.example.springboot.demo.service;
 
-import com.example.springboot.demo.pojo.command.AnimalReqData;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.pojo.vo.AnimalRes;
 
@@ -11,7 +10,7 @@ import com.example.springboot.demo.pojo.vo.AnimalRes;
 public interface DemoService {
 
 
-  AnimalRes put(AnimalReq req) throws Exception;
+    AnimalRes put(AnimalReq req) throws Exception;
 
 
 }

@@ -14,23 +14,23 @@ import javax.annotation.PostConstruct;
 @MapperScan("com.example.springboot.demo.repository.db.mapper")
 public class SpringBootDemoApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(SpringBootDemoApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootDemoApplication.class, args);
+    }
 
-  @Autowired
-  private InitService initService;
+    @Autowired
+    private InitService initService;
 
-  @PostConstruct
-  public void init() {
-    initService.init();
-  }
+    @PostConstruct
+    public void init() {
+        initService.init();
+    }
 
 
-  @Bean
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
-  }
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 
 }

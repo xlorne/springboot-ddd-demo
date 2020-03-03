@@ -17,12 +17,12 @@ public class MsgDomain extends DomainObject {
     private final MsgReq msgReq;
 
     public MsgDomain(Long refrigeratorId, String data) {
-        this.msgReq = new MsgReq(refrigeratorId,data);
+        this.msgReq = new MsgReq(refrigeratorId, data);
     }
 
-    public void sendMsg(){
+    public void sendMsg() {
         MsgRes msgRes = repository(MessageClientHandler.class).send(msgReq);
-        log.info("send msg=>{}",msgRes);
+        log.info("send msg=>{}", msgRes);
 
     }
 

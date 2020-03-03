@@ -17,9 +17,9 @@ public class RefrigeratorHandler implements RepositoryHandlerI {
 
     private RefrigeratorQuery refrigeratorQuery;
 
-    public Refrigerator findSpace(){
+    public Refrigerator findSpace() {
         return refrigeratorQuery.findSpace();
     }
-    
+
 
 }

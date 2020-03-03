@@ -28,7 +28,7 @@ public class AnimalReqExe implements ExecutorI<AnimalReqData, AnimalReqCommand> 
 
         //创建另外一个Domain
         long refrigeratorId = refrigeratorDomain.getRefrigerator().getId();
-        MsgDomain msgDomain = new MsgDomain(refrigeratorId,name);
+        MsgDomain msgDomain = new MsgDomain(refrigeratorId, name);
         msgDomain.sendMsg();
 
         return new AnimalReqData(refrigeratorDomain.getRefrigerator());

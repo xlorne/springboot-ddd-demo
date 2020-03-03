@@ -23,12 +23,12 @@ public class RefrigeratorDomain extends DomainObject {
 
     public RefrigeratorDomain() {
         refrigerator = repository(RefrigeratorHandler.class).findSpace();
-        log.info("refrigerator=>{}",refrigerator);
+        log.info("refrigerator=>{}", refrigerator);
         checkRefrigerator();
     }
 
 
-    private void checkRefrigerator(){
+    private void checkRefrigerator() {
         if (refrigerator == null) {
             throw new RuntimeException("抱歉冰箱已经满了.");
         }
@@ -45,11 +45,9 @@ public class RefrigeratorDomain extends DomainObject {
         extensionExecutor.executeVoid(
                 RefrigeratorUpdateExtPt.class,
                 getBizScenario(),
-                (extension)-> extension.update(refrigerator));
+                (extension) -> extension.update(refrigerator));
 
     }
-
-
 
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class AnimalRes {
 
-  private long id;
-  private Date time;
+    private long id;
+    private Date time;
 
 }
