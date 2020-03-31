@@ -17,7 +17,7 @@
 |  层次    | 说明  |
 |  :----  | :----  |
 | controller  |  提供服务的访问层，目前采用RestController的方式，也做基础数据格式校验的业务。  |
-| service  |  业务适配调用层，这与三层架构的业务层差别较大，该service主要是做对vo数据的适配处理以及executor层的协调调用。 |
+| service  |  对应上图中的services部分，将被controller使用，定义的传入传出是executor定义的command与Data格式。 |
 | convertor  | 适配层，适配层的存在也是为了避免各层次间的强依赖,为了更清新的划分清楚层次，如command对象将不直接依赖vo对象，而是通过convertor或构造数据做适配 |
 | executor  | 具体业务命令的逻辑编排与执行，这是业务逻辑处理的关键地方。|
 | extension  | 业务扩展层，可扩展多种业务实现，COLA提供了全局的策略规范。 |
@@ -27,18 +27,115 @@
             
 本项目功能:把大象放进冰箱，本项目的代码是我刚开始上路的起步阶段，还有很多不足，大家仅做参考。     
 
-### 关于领域的理解  
-A: 比如用户领域(UserDomain)具体是指什么？        
-Q: 用户领域将会锁定对某一个用户的操作，这个用户往往通过构造是创建指定。UserDomain的代码也是围绕对这个User对象的操作，这就是用户领域。   
+### 我的落地方式  
+我对领域的理解从刚开始的探索，到慢慢在实际项目中使用有经历了一段时间。但一直感觉很难完全模仿张建飞老师在demo中的写法方式，或许是因为我个人技艺不精吧，总感觉写出来的业务代码反而更加复杂化了。
+我在结合COLA的理解，以及我们项目的推进方式上总结了一套，我们可推行的方式，下面我分享给大家，还望多多指教。
 
-A: UserDomain与UserMapper(UserDao)什么差异？   
-Q: 谈到对用户的操作，大家往往想到UserMapper(UserDao)，实际上他们的差异还是比较大，从操作数据层面来讲UserDomain都是固定对某一个用户的操作，而非对用户表数据的操作，UserDao是对User表的所有数据的操作。从使用层面来说UserDomain是通过构造器创建，而UserMapper或UserDao往往都是直接注入使用。从他们两者关系上来说，UserDomain对资源操作时需要借助UserDao来完成数据操作。   
+* 业务需求分析    
+根据业务功能需求，分析系统中的用例，并画出各个用例的业务关键流程图，流程图中只关心影响业务走向的动作。
+* 业务领域建模   
+划分领域模块，参考[四色建模](https://blog.csdn.net/phenixIII/article/details/16341389?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)的方式，根据上面画出的流程图，标记出来业务关键数据作为领域的名称。这些领域将都是业务流转过程中留下的业务关键足迹数据。
+* 数据库建模
+数据库建模或者说是数据库建表，建表需要考虑业务逻辑和界面数据展示，然后设计出来表结构，根据表对应领域的划分，将对应的Tunnel放在对应的领域中。
+* 分析复用业务
+当数据库结构与领域模块建立以后，根据业务流程图可以比较容易的分析出那些功能流程在系统中会被多个地方调用。将这些会被复用的业务流程做成可复用的Event。
 
-A: 关于Domain命名规范有什么讲究？   
-Q: 先说Model层面的领域如何定义。比如如何区分 UserDomain、UserListDomain，他们之间的差异就是操作数据上的差异，UserDomain是对某一个User的Domain，UserListDomain是对List<User>的Domain. 再就是service(action)层的领域命名，这一块往往以动作来命名，比如CreateOrderDomain,SaveUserDomain. 
+关于Executor(Application Service)的认识   
+executor是作为业务的核心处理类，是业务的具体实现过程。根据项目的数据特点分为两种Executor，一种查询业务，一种是操作业务。      
+查询业务:往往是直接对数据库表做查询的业务，通常返回详情、列表、分页格式的数据，这一类的接口通常不会有复杂的逻辑业务只需要查询然后直接返回数据。     
+操作业务:该类型的业务往往是伴随着逻辑的，比如创建订单时需要检查商品、用户等信息，比如发货时需要检查收获人的信息等。对于这一类的业务有会区分为三种操作方式，分别是业务逻辑、数据逻辑、资源操作。     
+业务逻辑:是指不依赖数据的业务检查、判断、校验、数据组装等行为的逻辑代码，例如下单时需要计算平台抽佣金额，那可以将抽佣金额计算的逻辑放在业务逻辑中实现。    
+数据逻辑:是指依赖表数据为检查、判断的代码，比如检查订单状态是否正常，保存、修改订单数据等操作。     
+资源操作:是指需要对批量数据做检查、或对批量数据做修改保存的代码逻辑，他区别与数据逻辑的地方是，他是同事对多条记录做检查与操作的。    
+
+项目中复用的地方:    
+1、executor层的复用，这些复用点都是业务流程中某些被大量互相依赖调用的功能流程。     
+2、业务逻辑复用，并不一定所有定义的业务逻辑都会被复用到，但是某些业务逻辑是需要复用的，利用分佣计算。   
+3、数据逻辑复用，将会在项目中大量存在，这些复用点都是些对单数据做的些简单逻辑检查或是数据操作。    
+
+
+如下代码分别是下单与确认售后的部分代码实现逻辑:
+```java
+    
+    @Override
+    public SingleResponse<OrderAddData> execute(OrderAddCommand cmd) {
+        //用户地址检查
+        AddressTunnel addressTunnel = new AddressTunnel(cmd.getAddressKid());
+        String addressInfo = addressTunnel.addressInfo();
+        //商家数据检查
+        BusinessTunnel businessTunnel = new BusinessTunnel(cmd.getBuyBusinessKid());
+        //获取佣金数据
+        ProfitTunnel profitTunnel = new ProfitTunnel(businessTunnel.getCityPartnerKid(), businessTunnel.getRegionPartnerKid());
+        //佣金计算
+        OrderCalculateInf calculateProfit = profitTunnel.calculateProfit(cmd.getSellingPrice(), cmd.getReferPrice());
+        //转换Order对象
+        OrderTunnel orderTunnel = new OrderTunnel(OrderConvertor.createOrder(calculateProfit, cmd, addressInfo, addressTunnel.getKid()));
+        //保存订单
+        orderTunnel.save();
+        //保存商品
+        List<PartsInfo> partsInfoList = PartsInfoConvertor.parser(orderTunnel.getOrderId(), cmd.getPartsInfs());
+        orderRepository.savePartsInfo(partsInfoList);
+        //返回数据
+        OrderAddData orderAddData = new OrderAddData(orderTunnel.getOrderId(), orderTunnel.getCreateTime(), orderTunnel.getOrderKid());
+        return SingleResponse.of(orderAddData);
+    }
+
+
+    @Override
+    public Response execute(SubmitAfterSaleCommand cmd) {
+        AfterSaleTunnel afterSaleTunnel = new AfterSaleTunnel(cmd.getAfterSaleId());
+        afterSaleTunnel.checkRunSate();
+
+        OrderTunnel orderTunnel = new OrderTunnel(afterSaleTunnel.getOrderId());
+        //订单若还尚未完成时需要在售后完成后结束订单
+        boolean orderRunning = !orderTunnel.isFinishState();
+
+        // 添加对账记录
+        ReconciliationAddEvent reconciliationAddEvent = new ReconciliationAddEvent();
+        reconciliationAddEvent.setAfterSaleId(afterSaleTunnel.getAfterSaleId());
+        domainEventPublisher.publish(reconciliationAddEvent);
+
+        if(orderTunnel.isCredit()){
+            //添加挂账售后记录
+            CreditRecordingAddEvent creditRecordingAddEvent = new CreditRecordingAddEvent();
+            creditRecordingAddEvent.setAfterSaleId(afterSaleTunnel.getAfterSaleId());
+            domainEventPublisher.publish(creditRecordingAddEvent);
+        }
+
+        if(orderTunnel.isOnlinePay()){
+            //退款
+            PayType payType = orderTunnel.getPayType();
+            PayRefund payRefund = PaySelecter.select(payType,orderTunnel.getInvoiceType(), PayRefund.class);
+            boolean isOver = payRefund.refund(orderTunnel.getTransactionId(),new PayMoney(afterSaleTunnel.getSellMoney()),new PayMoney(afterSaleTunnel.getSellMoney()));
+            if(!isOver){
+                domainEventPublisher.publish(AfterSaleRecordingAddEvent.builder().afterSaleId(afterSaleTunnel.getAfterSaleId()).build());
+            }
+        }else {
+            domainEventPublisher.publish(AfterSaleRecordingAddEvent.builder().afterSaleId(afterSaleTunnel.getAfterSaleId()).build());
+        }
+
+        afterSaleTunnel.overSate();
+
+        //添加负分佣记录
+        IncomeAddEvent incomeAddEvent = new IncomeAddEvent();
+        incomeAddEvent.setAfterSaleId(afterSaleTunnel.getAfterSaleId());
+        domainEventPublisher.publish(incomeAddEvent);
+
+        if(orderRunning){
+            domainEventPublisher.publish(new ConfirmReceiptEvent(orderTunnel.getOrderKid()));
+        }
+        return Response.buildSuccess();
+    }
+```
+给大家的建议:   
+
+层次的分明是件非常重要的事情，他将会帮助你细分颗粒度，就好比是垃圾分类一样，它会让你清楚每段代码该扔到那个桶中，是达到让上帝的归上帝凯撒的归凯撒效果的根本。    
+要学会用类去实现业务，而不是以面向过程式的函数去实现功能，以类实现功能你将会更容易的去细分颗粒度，可让复杂的业务简单化。      
+当你慢慢习惯了用类去解决问题的时候，还需要留意我下文中提到那些设计模式原则，他将会让你更加清晰的去定义一个类的功能职责。    
+
 
 ## 关于敏捷开发
-敏捷开发的关键是：阶段性发布可用功能版本，长期持续的推进项目进度。其实还是比较好理解的，但是如何才能做好呢？实际上很多项目的研发过程就像是在垒扑克牌，一对一对的垒，越垒越高，在垒到足够高的时候，去调整一个小功能时却导致了整盘的倒塌，敏捷并不是做好项目的根本。
+敏捷开发的关键是：阶段性发布可用功能版本，长期持续的推进项目进度。其实是比较好理解的，但是如何才能确保做好呢？实际上很多项目的研发过程就像是在垒扑克牌，一对一对的垒，越垒越高，在垒到足够高的时候，去调整一个小功能时却导致了整盘的倒塌，敏捷并不是做好项目的方法，在我看来敏捷只是一中项目。
 ```
        /\
       /\/\                /\
