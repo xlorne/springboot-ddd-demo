@@ -1,6 +1,7 @@
 package com.example.springboot.demo.domain.model;
 
 import com.alibaba.cola.domain.DomainObject;
+import com.example.springboot.cola.BizScenarioThreadLocal;
 import com.example.springboot.demo.extension.RefrigeratorUpdateExtPt;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.handler.RefrigeratorHandler;
@@ -15,18 +16,17 @@ import java.util.Date;
  * @description
  */
 @Slf4j
-public class RefrigeratorDomain extends DomainObject {
+public class RefrigeratorTunnel extends DomainObject {
 
     @Getter
     private final Refrigerator refrigerator;
 
 
-    public RefrigeratorDomain() {
+    public RefrigeratorTunnel() {
         refrigerator = repository(RefrigeratorHandler.class).findSpace();
         log.info("refrigerator=>{}", refrigerator);
         checkRefrigerator();
     }
-
 
     private void checkRefrigerator() {
         if (refrigerator == null) {
@@ -44,7 +44,7 @@ public class RefrigeratorDomain extends DomainObject {
 
         extensionExecutor.executeVoid(
                 RefrigeratorUpdateExtPt.class,
-                getBizScenario(),
+                BizScenarioThreadLocal.current(),
                 (extension) -> extension.update(refrigerator));
 
     }

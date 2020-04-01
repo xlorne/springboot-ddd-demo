@@ -1,7 +1,8 @@
 package com.example.springboot.demo.service.impl;
 
-import com.example.springboot.demo.pojo.vo.AnimalReq;
-import com.example.springboot.demo.pojo.vo.AnimalRes;
+import com.alibaba.cola.dto.SingleResponse;
+import com.example.springboot.demo.pojo.command.AnimalReqCommand;
+import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.feign.MessageClient;
 import com.example.springboot.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,14 +22,11 @@ class DemoServiceImplTest {
     @MockBean
     private MessageClient messageClient;
 
-
     @Test
     void put() throws Exception {
-        AnimalReq animalReq = new AnimalReq();
-        animalReq.setName("大象");
-        AnimalRes animalRes = demoService.put(animalReq);
-        Assert.isTrue(animalRes.getId() > 0, "保存失败.");
-        log.info("res=>{}", animalRes);
+        SingleResponse<Refrigerator> response = demoService.put(new AnimalReqCommand("大象"));
+        Assert.isTrue(response.getData().getId() > 0, "保存失败.");
+        log.info("res=>{}", response.getData());
     }
 
 }

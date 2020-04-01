@@ -12,11 +12,11 @@ import lombok.extern.slf4j.Slf4j;
  * @description
  */
 @Slf4j
-public class MsgDomain extends DomainObject {
+public class MsgTunnel extends DomainObject {
 
     private final MsgReq msgReq;
 
-    public MsgDomain(Long refrigeratorId, String data) {
+    public MsgTunnel(Long refrigeratorId, String data) {
         this.msgReq = new MsgReq(refrigeratorId, data);
     }
 

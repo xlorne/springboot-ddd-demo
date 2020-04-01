@@ -1,12 +1,16 @@
 package com.example.springboot.demo.executor;
 
+import com.alibaba.cola.dto.SingleResponse;
 import com.alibaba.cola.executor.Executor;
 import com.alibaba.cola.executor.ExecutorI;
-import com.example.springboot.demo.domain.model.MsgDomain;
-import com.example.springboot.demo.domain.model.RefrigeratorDomain;
+import com.alibaba.cola.extension.ExtensionExecutor;
+import com.example.springboot.cola.BizScenarioThreadLocal;
+import com.example.springboot.demo.domain.model.MsgTunnel;
+import com.example.springboot.demo.domain.model.RefrigeratorTunnel;
 import com.example.springboot.demo.extension.ExtensionConstants;
+import com.example.springboot.demo.extension.RefrigeratorUpdateExtPt;
 import com.example.springboot.demo.pojo.command.AnimalReqCommand;
-import com.example.springboot.demo.pojo.command.AnimalReqData;
+import com.example.springboot.demo.repository.db.domain.Refrigerator;
 
 /**
  * @author lorne
@@ -14,24 +18,27 @@ import com.example.springboot.demo.pojo.command.AnimalReqData;
  * @description
  */
 @Executor
-public class AnimalReqExe implements ExecutorI<AnimalReqData, AnimalReqCommand> {
+public class AnimalReqExe implements ExecutorI<SingleResponse<Refrigerator>, AnimalReqCommand> {
+
 
     @Override
-    public AnimalReqData execute(AnimalReqCommand cmd) {
+    public SingleResponse<Refrigerator> execute(AnimalReqCommand cmd) {
+
+        BizScenarioThreadLocal.set(ExtensionConstants.bizScenario);
+
         //获取参数
         String name = cmd.getName();
         //创建Domain
-        RefrigeratorDomain refrigeratorDomain = new RefrigeratorDomain();
+        RefrigeratorTunnel refrigeratorTunnel = new RefrigeratorTunnel();
         //设置扩展
-        refrigeratorDomain.setBizScenario(ExtensionConstants.bizScenario);
-        refrigeratorDomain.putAnimal(name);
+        refrigeratorTunnel.putAnimal(name);
 
         //创建另外一个Domain
-        long refrigeratorId = refrigeratorDomain.getRefrigerator().getId();
-        MsgDomain msgDomain = new MsgDomain(refrigeratorId, name);
-        msgDomain.sendMsg();
+        long refrigeratorId = refrigeratorTunnel.getRefrigerator().getId();
+        MsgTunnel msgTunnel = new MsgTunnel(refrigeratorId, name);
+        msgTunnel.sendMsg();
 
-        return new AnimalReqData(refrigeratorDomain.getRefrigerator());
+        return SingleResponse.of(refrigeratorTunnel.getRefrigerator());
     }
 
 }

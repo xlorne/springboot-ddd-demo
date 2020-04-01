@@ -1,7 +1,8 @@
 package com.example.springboot.demo.service;
 
-import com.example.springboot.demo.pojo.vo.AnimalReq;
-import com.example.springboot.demo.pojo.vo.AnimalRes;
+import com.alibaba.cola.dto.SingleResponse;
+import com.example.springboot.demo.pojo.command.AnimalReqCommand;
+import com.example.springboot.demo.repository.db.domain.Refrigerator;
 
 /**
  * Service层在之前的CodingAPI架构层中称为API-Service层也可以称为业务流程控制层或者应用层。 该层主要的职责是协调各Manager层完成对业务的处理，注意这里主要是做业务的编排和参数转化处理业务，不执行业务操作。
@@ -10,7 +11,7 @@ import com.example.springboot.demo.pojo.vo.AnimalRes;
 public interface DemoService {
 
 
-    AnimalRes put(AnimalReq req) throws Exception;
+    SingleResponse<Refrigerator> put(AnimalReqCommand animalReqCommand) throws Exception;
 
 
 }
