@@ -41,7 +41,7 @@ public class AnimalPutCmdExe implements ExecutorI<SingleResponse<Refrigerator>, 
         AnimalSaveEvent animalSaveEvent = new AnimalSaveEvent();
         animalSaveEvent.setName(newRefrigerator.getValue());
         animalSaveEvent.setRefrigeratorId(refrigeratorId);
-        domainEventService.publish(animalSaveEvent);
+        domainEventService.asyncPublish(animalSaveEvent);
 
         return SingleResponse.of(newRefrigerator);
     }

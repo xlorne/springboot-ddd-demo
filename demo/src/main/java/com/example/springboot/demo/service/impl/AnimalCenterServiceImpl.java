@@ -12,6 +12,7 @@ import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.service.AnimalCenterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +29,7 @@ public class AnimalCenterServiceImpl implements AnimalCenterService {
     }
 
     @Override
+    @Transactional
     public SingleResponse<Refrigerator> put(AnimalReq animalReq) {
         AnimalPutCommand animalPutCommand = new AnimalPutCommand(animalReq.getName());
         return executorBus.send(animalPutCommand);
