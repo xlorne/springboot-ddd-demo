@@ -32,9 +32,20 @@
         </dependency>
 
         <dependency>
+            <groupId>com.codingapi</groupId>
+            <artifactId>simple-mybatis</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
         </dependency>
 
     </dependencies>

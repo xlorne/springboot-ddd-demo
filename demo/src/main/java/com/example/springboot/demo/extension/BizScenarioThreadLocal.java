@@ -1,4 +1,4 @@
-package com.example.springboot.cola;
+package com.example.springboot.demo.extension;
 
 import com.alibaba.cola.extension.BizScenario;
 

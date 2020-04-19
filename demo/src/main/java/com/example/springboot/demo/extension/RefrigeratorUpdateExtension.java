@@ -18,7 +18,7 @@ public class RefrigeratorUpdateExtension implements RefrigeratorUpdateExtPt {
 
     @Override
     public void update(Refrigerator refrigerator) {
-        refrigeratorMapper.updateValue(refrigerator);
+        refrigeratorMapper.update(refrigerator);
     }
 
 }
