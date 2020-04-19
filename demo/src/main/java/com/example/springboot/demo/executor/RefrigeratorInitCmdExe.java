@@ -3,7 +3,7 @@ package com.example.springboot.demo.executor;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.executor.Executor;
 import com.alibaba.cola.executor.ExecutorI;
-import com.example.springboot.demo.domain.model.RefrigeratorRandomProfile;
+import com.example.springboot.demo.domain.refrigerator.RefrigeratorRandomProfile;
 import com.example.springboot.demo.pojo.command.RefrigeratorInitCommand;
 import com.example.springboot.demo.repository.db.mapper.RefrigeratorMapper;
 import lombok.AllArgsConstructor;

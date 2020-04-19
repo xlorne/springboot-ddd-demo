@@ -19,11 +19,8 @@ public class AnimalMsgSaveQryExe implements QueryExecutorI<Response, AnimalMsgQu
 
     @Override
     public Response execute(AnimalMsgQuery cmd) {
-        MsgReq msgReq = new MsgReq();
-        msgReq.setData(cmd.getAnimalName());
-        msgReq.setRefrigeratorId(cmd.getRefrigeratorId());
-        MsgRes msgRes =  messageClient.send(msgReq);
-        log.info("accept:msg=>{}",msgRes);
+        MsgRes msgRes = messageClient.send(new MsgReq(cmd.getRefrigeratorId(), cmd.getAnimalName()));
+        log.info("accept:msg=>{}", msgRes);
         return Response.buildSuccess();
     }
 }

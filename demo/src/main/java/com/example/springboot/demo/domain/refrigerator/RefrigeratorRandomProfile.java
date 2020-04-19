@@ -1,4 +1,4 @@
-package com.example.springboot.demo.domain.model;
+package com.example.springboot.demo.domain.refrigerator;
 
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import lombok.extern.slf4j.Slf4j;

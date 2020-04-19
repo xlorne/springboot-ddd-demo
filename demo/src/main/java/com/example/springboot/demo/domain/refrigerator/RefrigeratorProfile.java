@@ -1,4 +1,4 @@
-package com.example.springboot.demo.domain.model;
+package com.example.springboot.demo.domain.refrigerator;
 
 import com.alibaba.cola.domain.EntityObject;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
