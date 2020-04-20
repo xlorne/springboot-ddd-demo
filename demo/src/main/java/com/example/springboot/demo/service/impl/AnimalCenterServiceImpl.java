@@ -6,7 +6,6 @@ import com.alibaba.cola.executor.ExecutorBus;
 import com.example.springboot.demo.event.domainevent.AnimalSaveEvent;
 import com.example.springboot.demo.pojo.command.AnimalMsgQuery;
 import com.example.springboot.demo.pojo.command.AnimalPutCommand;
-import com.example.springboot.demo.pojo.command.RefrigeratorInitCommand;
 import com.example.springboot.demo.pojo.vo.AnimalReq;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.service.AnimalCenterService;
