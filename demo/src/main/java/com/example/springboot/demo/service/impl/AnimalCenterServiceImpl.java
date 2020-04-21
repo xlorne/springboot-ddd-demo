@@ -28,7 +28,6 @@ public class AnimalCenterServiceImpl implements AnimalCenterService {
     }
 
     @Override
-    @Transactional
     public SingleResponse<Refrigerator> put(AnimalReq animalReq) {
         AnimalPutCommand animalPutCommand = new AnimalPutCommand(animalReq.getName());
         return executorBus.send(animalPutCommand);

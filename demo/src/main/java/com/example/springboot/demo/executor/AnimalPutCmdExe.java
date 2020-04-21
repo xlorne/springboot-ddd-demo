@@ -1,6 +1,6 @@
 package com.example.springboot.demo.executor;
 
-import com.alibaba.cola.aspect.TransactionEventQueue;
+import com.alibaba.cola.aspect.ServiceEventQueue;
 import com.alibaba.cola.dto.SingleResponse;
 import com.alibaba.cola.executor.Executor;
 import com.alibaba.cola.executor.ExecutorI;
@@ -34,7 +34,7 @@ public class AnimalPutCmdExe implements ExecutorI<SingleResponse<Refrigerator>, 
         refrigeratorMapper.update(newRefrigerator);
 
         //加入推送消息
-        TransactionEventQueue.push(AnimalSaveEventConvertor.parser(newRefrigerator));
+        ServiceEventQueue.push(AnimalSaveEventConvertor.parser(newRefrigerator));
         return SingleResponse.of(newRefrigerator);
     }
 
