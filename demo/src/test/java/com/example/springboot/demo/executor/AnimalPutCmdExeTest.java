@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AnimalPutCmdExeTest {
@@ -17,14 +18,30 @@ class AnimalPutCmdExeTest {
     private RefrigeratorMapper refrigeratorMapper;
 
     @BeforeEach
-    void before(){
+     void before(){
         refrigeratorMapper = Mockito.mock(RefrigeratorMapper.class);
-        Mockito.when(refrigeratorMapper.findSpace()).thenReturn(new Refrigerator());
         animalPutCmdExe = new AnimalPutCmdExe(refrigeratorMapper);
     }
 
     @Test
-    void execute() {
+    void executeFail() {
+        try {
+            AnimalPutCommand animalPutCommand = new AnimalPutCommand("大象");
+            Response response = animalPutCmdExe.execute(animalPutCommand);
+        }catch (Exception e){
+            assertThrows(RuntimeException.class,()->{
+                throw e;
+            });
+        }
+    }
+
+    void mock(){
+        Mockito.when(refrigeratorMapper.findSpace()).thenReturn(new Refrigerator());
+    }
+
+    @Test
+    void executeSuccess(){
+        mock();
         AnimalPutCommand animalPutCommand = new AnimalPutCommand("大象");
         Response response =  animalPutCmdExe.execute(animalPutCommand);
         assertTrue(response.isSuccess(),"业务执行失败");
