@@ -1,5 +1,6 @@
 package com.example.springboot.demo;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -10,5 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SpringbootDemoApplicationTest {
 
+    @Test
+    void test(){
+
+    }
 
 }
