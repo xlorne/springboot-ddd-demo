@@ -2,6 +2,9 @@
 [![Build Status](https://travis-ci.org/1991wangliang/springboot-demo.svg?branch=new)](https://travis-ci.org/1991wangliang/springboot-demo)
 [![codecov](https://codecov.io/gh/1991wangliang/springboot-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/1991wangliang/springboot-demo)
 
+[视频讲解](https://www.bilibili.com/video/BV1ZA411i7M7/)    
+
+
 什么样的项目是一个好的项目,如何做好一个项目？这个问题我考虑过很久，由于之前一直做项目外包，也接触到的了比较多的项目，但是我却从没有感觉到哪一个项目可以让自己感到非常满意，当然做好项目不仅仅单是技术层面的考虑，还需要考虑到与客户的配合、功能的梳理、团队的配合、公司的考核晋升体系等等一系列的问题，我们今天先只从技术层面出发来考虑如何做好一个后端项目。
 
 在我慢慢看清楚领域模型之后，才有了些体会。先说一下我对领域模型的认识:领域模型实际上就是尽可能的引用类去解决问题，而不是函数，也就是朝着面向对象的方向看齐。这样做当然是对的，但却引发了一个新的问题就是如何划分类与类的职责？实际上划分职责的过程就是领域设计的过程。
