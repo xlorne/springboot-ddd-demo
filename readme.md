@@ -2,6 +2,26 @@
 [![Build Status](https://travis-ci.org/1991wangliang/springboot-demo.svg?branch=new)](https://travis-ci.org/1991wangliang/springboot-demo)
 [![codecov](https://codecov.io/gh/1991wangliang/springboot-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/1991wangliang/springboot-demo)
 
+```$xslt
+@startuml
+actor 用户 #green
+control 认证中心
+database 缓存
+control 其他服务
+
+用户 -> 认证中心: 登录操作
+认证中心 --> 认证中心: 将数据保存起来
+认证中心 -> 缓存: 存放(key=token+ip,value=token)token
+用户 <- 认证中心 : 认证成功返回token
+用户 -> 认证中心: 下次访问头部携带token认证
+认证中心 <- 缓存: key=token+ip获取token
+其他服务 <- 认证中心: 存在且校验成功则跳转到用户请求的其他服务
+其他服务 -> 用户: 信息
+
+
+@enduml
+```
+
 [视频讲解(B站)](https://www.bilibili.com/video/BV1ZA411i7M7/) [视频讲解(YouTube)](https://www.youtube.com/watch?v=b3Au9Iw8mFU)   
 
 
