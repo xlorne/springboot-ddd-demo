@@ -4,7 +4,7 @@
 
 [视频讲解(B站)](https://www.bilibili.com/video/BV1ZA411i7M7/) [视频讲解(YouTube)](https://www.youtube.com/watch?v=b3Au9Iw8mFU)   
 <div hidden>
-<!--
+```
 @startuml firstDiagram
 actor 用户 #green
 control 认证中心
@@ -22,7 +22,7 @@ control 其他服务
 
 
 @enduml
--->
+```
 </div>
 ![](firstDiagram.svg)
 
