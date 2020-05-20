@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/1991wangliang/springboot-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/1991wangliang/springboot-demo)
 
 [视频讲解(B站)](https://www.bilibili.com/video/BV1ZA411i7M7/) [视频讲解(YouTube)](https://www.youtube.com/watch?v=b3Au9Iw8mFU)   
-
+<div hidden>
 <!--
 @startuml firstDiagram
 actor 用户 #green
@@ -23,7 +23,7 @@ control 其他服务
 
 @enduml
 -->
-
+</div>
 ![](firstDiagram.svg)
 
 什么样的项目是一个好的项目,如何做好一个项目？这个问题我考虑过很久，由于之前一直做项目外包，也接触到的了比较多的项目，但是我却从没有感觉到哪一个项目可以让自己感到非常满意，当然做好项目不仅仅单是技术层面的考虑，还需要考虑到与客户的配合、功能的梳理、团队的配合、公司的考核晋升体系等等一系列的问题，我们今天先只从技术层面出发来考虑如何做好一个后端项目。
