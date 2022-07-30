@@ -12,7 +12,7 @@ import java.util.Date;
  * 这是一个大号的冰箱，也可以理解成为一个冰库
  */
 @Data
-@Table(name = "t_refrigerator")
+@Table(name = "T_REFRIGERATOR")
 public class RefrigeratorEntity {
 
     /**
