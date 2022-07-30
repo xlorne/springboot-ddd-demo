@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-public class AnimalVO {
+public class RefrigeratorVO {
 
     @Data
     @AllArgsConstructor

@@ -11,23 +11,23 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AnimalExecutorTest {
+class RefrigeratorExecutorTest {
 
-    private RefrigeratorExecutor animalExecutor;
+    private RefrigeratorExecutor refrigeratorExecutor;
 
     private RefrigeratorRepository refrigeratorRepository;
 
     @BeforeEach
      void before(){
         refrigeratorRepository = Mockito.mock(RefrigeratorRepository.class);
-        animalExecutor = new RefrigeratorExecutor(refrigeratorRepository);
+        refrigeratorExecutor = new RefrigeratorExecutor(refrigeratorRepository);
     }
 
     @Test
-    void executeFail() {
+    void putFail() {
         try {
             RefrigeratorDTO.PutCommand putCommand = new RefrigeratorDTO.PutCommand("大象");
-            Response response = animalExecutor.putAnimal(putCommand);
+            Response response = refrigeratorExecutor.putAnimal(putCommand);
         }catch (Exception e){
             assertThrows(RuntimeException.class,()->{
                 throw e;
@@ -35,15 +35,17 @@ class AnimalExecutorTest {
         }
     }
 
-    void mock(){
+
+    @Test
+    void putSuccess(){
         Mockito.when(refrigeratorRepository.loadSpace()).thenReturn(new Refrigerator());
+        RefrigeratorDTO.PutCommand putCommand = new RefrigeratorDTO.PutCommand("大象");
+        Response response =  refrigeratorExecutor.putAnimal(putCommand);
+        assertTrue(response.isSuccess(),"业务执行失败");
     }
 
     @Test
-    void executeSuccess(){
-        mock();
-        RefrigeratorDTO.PutCommand putCommand = new RefrigeratorDTO.PutCommand("大象");
-        Response response =  animalExecutor.putAnimal(putCommand);
-        assertTrue(response.isSuccess(),"业务执行失败");
+    void init() {
+        refrigeratorExecutor.init();
     }
 }

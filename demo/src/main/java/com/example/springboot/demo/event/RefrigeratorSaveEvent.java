@@ -4,7 +4,7 @@ import com.codingapi.springboot.framework.event.IEvent;
 import lombok.Data;
 
 @Data
-public class AnimalSaveEvent implements IEvent {
+public class RefrigeratorSaveEvent implements IEvent {
 
     private String name;
 

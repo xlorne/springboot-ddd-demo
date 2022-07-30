@@ -2,8 +2,8 @@ package com.example.springboot.demo.controller;
 
 import com.codingapi.springboot.framework.dto.response.SingleResponse;
 import com.example.springboot.demo.domain.Refrigerator;
-import com.example.springboot.demo.pojo.vo.AnimalVO;
-import com.example.springboot.demo.service.AnimalCenterService;
+import com.example.springboot.demo.pojo.vo.RefrigeratorVO;
+import com.example.springboot.demo.service.RefrigeratorService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @AllArgsConstructor
-public class DemoController {
+public class RefrigeratorController {
 
-    private AnimalCenterService animalCenterService;
+    private RefrigeratorService refrigeratorService;
 
     @PostMapping("/put")
-    public SingleResponse<Refrigerator> put(@Validated @RequestBody AnimalVO.AnimalReq animalReq) {
-        return animalCenterService.put(animalReq);
+    public SingleResponse<Refrigerator> put(@Validated @RequestBody RefrigeratorVO.AnimalReq animalReq) {
+        return refrigeratorService.put(animalReq);
     }
 }

@@ -5,7 +5,7 @@ import com.codingapi.springboot.framework.event.EventPusher;
 import com.example.springboot.demo.domain.Refrigerator;
 import com.example.springboot.demo.domain.RefrigeratorFactory;
 import com.example.springboot.demo.domain.RefrigeratorRepository;
-import com.example.springboot.demo.event.AnimalSaveEvent;
+import com.example.springboot.demo.event.RefrigeratorSaveEvent;
 import com.example.springboot.demo.pojo.command.RefrigeratorDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class RefrigeratorExecutor {
         refrigeratorRepository.update(refrigerator);
 
         //加入推送消息
-        AnimalSaveEvent event = new AnimalSaveEvent();
+        RefrigeratorSaveEvent event = new RefrigeratorSaveEvent();
         event.setName(refrigerator.getValue());
         event.setRefrigeratorId(refrigerator.getId());
 
