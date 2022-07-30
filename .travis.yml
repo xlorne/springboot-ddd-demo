@@ -12,6 +12,7 @@ services:
 before_install:
   - pip install --user codecov
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - mysql -e 'lower_case_table_names=1'
   - mysql -u root --password=  < ./init/init.sql
 
 script:
