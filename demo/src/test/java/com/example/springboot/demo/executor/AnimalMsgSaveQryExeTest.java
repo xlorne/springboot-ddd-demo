@@ -1,6 +1,6 @@
 package com.example.springboot.demo.executor;
 
-import com.alibaba.cola.dto.Response;
+import com.codingapi.springboot.framework.dto.response.Response;
 import com.example.springboot.demo.pojo.command.AnimalMsgQuery;
 import com.example.springboot.demo.repository.feign.MessageClient;
 import org.junit.jupiter.api.BeforeEach;
