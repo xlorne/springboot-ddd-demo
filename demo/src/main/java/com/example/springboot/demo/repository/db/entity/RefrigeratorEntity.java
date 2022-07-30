@@ -1,4 +1,4 @@
-package com.example.springboot.demo.repository.db.domain;
+package com.example.springboot.demo.repository.db.entity;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Table(name = "t_refrigerator")
-public class Refrigerator {
+public class RefrigeratorEntity {
 
     /**
      * 冰箱格栅编号

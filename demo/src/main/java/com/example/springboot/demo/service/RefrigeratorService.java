@@ -1,7 +1,17 @@
 package com.example.springboot.demo.service;
 
-public interface RefrigeratorService {
+import com.example.springboot.demo.executor.RefrigeratorExecutor;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
-    void init();
+@Service
+@AllArgsConstructor
+public class RefrigeratorService {
+
+    private final RefrigeratorExecutor refrigeratorExecutor;
+
+    public void init() {
+        refrigeratorExecutor.init();
+    }
 
 }

@@ -1,17 +1,22 @@
 package com.example.springboot.demo.service;
 
-import com.codingapi.springboot.framework.dto.response.Response;
 import com.codingapi.springboot.framework.dto.response.SingleResponse;
-import com.example.springboot.demo.event.domainevent.AnimalSaveEvent;
-import com.example.springboot.demo.pojo.vo.AnimalReq;
-import com.example.springboot.demo.repository.db.domain.Refrigerator;
+import com.example.springboot.demo.domain.Refrigerator;
+import com.example.springboot.demo.executor.RefrigeratorExecutor;
+import com.example.springboot.demo.pojo.command.RefrigeratorDTO;
+import com.example.springboot.demo.pojo.vo.AnimalVO;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
-public interface AnimalCenterService {
+@Service
+@AllArgsConstructor
+public class AnimalCenterService {
 
-    Response saveAnimal(AnimalSaveEvent animalSaveEvent);
+    private final RefrigeratorExecutor refrigeratorExecutor;
 
-    SingleResponse<Refrigerator> put(AnimalReq animalReq);
-
-
+    public SingleResponse<Refrigerator> put(AnimalVO.AnimalReq animalReq) {
+        RefrigeratorDTO.PutCommand putCommand = new RefrigeratorDTO.PutCommand(animalReq.getName());
+        return refrigeratorExecutor.putAnimal(putCommand);
+    }
 
 }

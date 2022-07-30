@@ -1,4 +1,4 @@
-package com.example.springboot.demo.repository.feign;
+package com.example.springboot.demo.feign;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

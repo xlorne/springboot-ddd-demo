@@ -1,11 +1,11 @@
-package com.example.springboot.demo.domain.refrigerator;
+package com.example.springboot.demo.domain;
 
-import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author lorne
@@ -13,13 +13,13 @@ import java.util.List;
  * @description
  */
 @Slf4j
-public class RefrigeratorRandomProfile {
+public class RefrigeratorFactory {
 
-   private List<String> names = new ArrayList<>();
+   private final List<String> names = new ArrayList<>();
 
-   private int index = 0;
+   private final AtomicInteger index = new AtomicInteger(0);
 
-    public RefrigeratorRandomProfile() {
+    public RefrigeratorFactory() {
         names.add("大象他妈妈");
         names.add("大象他弟弟");
         names.add("大象他妹妹");
@@ -32,7 +32,7 @@ public class RefrigeratorRandomProfile {
 
     public Refrigerator randomAnimal(){
         Refrigerator refrigerator = new Refrigerator();
-        refrigerator.setValue(names.get(index++));
+        refrigerator.setValue(names.get(index.getAndAdd(1)));
         refrigerator.setState(1);
         refrigerator.setTime(new Date());
         return refrigerator;
@@ -40,7 +40,7 @@ public class RefrigeratorRandomProfile {
 
     public Refrigerator randomSpace(){
         Refrigerator refrigerator = new Refrigerator();
-        refrigerator.setValue(names.get(index++));
+        refrigerator.setValue(names.get(index.getAndAdd(1)));
         refrigerator.setState(0);
         refrigerator.setTime(new Date());
         return refrigerator;

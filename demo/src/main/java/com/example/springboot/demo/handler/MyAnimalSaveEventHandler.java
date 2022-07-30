@@ -1,8 +1,8 @@
-package com.example.springboot.demo.event.handler;
+package com.example.springboot.demo.handler;
 
 import com.codingapi.springboot.framework.handler.Handler;
 import com.codingapi.springboot.framework.handler.IHandler;
-import com.example.springboot.demo.event.domainevent.AnimalSaveEvent;
+import com.example.springboot.demo.event.AnimalSaveEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
