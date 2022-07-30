@@ -1,7 +1,7 @@
 package com.example.springboot.messsage;
 
-import com.example.springboot.core.view.MsgReq;
-import com.example.springboot.core.view.MsgRes;
+import com.example.springboot.client.ao.MsgReq;
+import com.example.springboot.client.ao.MsgRes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MsgController {
 
     @PostMapping("/send")
-    public MsgRes send(@RequestBody MsgReq msgReq){
-        log.info("msg->{}",msgReq);
+    public MsgRes send(@RequestBody MsgReq msgReq) {
+        log.info("msg->{}", msgReq);
         return new MsgRes(System.currentTimeMillis());
     }
 

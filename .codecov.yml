@@ -4,5 +4,5 @@ coverage:
       default:
         threshold: 0.1%
 ignore:
-- ".mvn/.*"
-- "sql/.*"
+  - ".mvn/.*"
+  - "sql/.*"
