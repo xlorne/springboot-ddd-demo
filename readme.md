@@ -80,9 +80,9 @@
  
 ## COLA架构系统介绍
 
-本项目依赖COLA，运行本项目前需要先将COLA安装到本地。源码维护见: https://github.com/1991wangliang/COLA    
-
 ![COLA架构图](img/cola.png)
+
+本项目基于[springboot领域驱动框架](https://github.com/codingapi/springboot-framework)开发
 
 层次介绍:      
 
