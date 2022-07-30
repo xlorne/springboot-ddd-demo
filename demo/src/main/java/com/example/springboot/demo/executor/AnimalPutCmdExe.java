@@ -1,28 +1,26 @@
 package com.example.springboot.demo.executor;
 
-import com.alibaba.cola.aspect.ServiceEventQueue;
-import com.alibaba.cola.dto.SingleResponse;
-import com.alibaba.cola.executor.Executor;
-import com.alibaba.cola.executor.ExecutorI;
+import com.codingapi.springboot.framework.dto.response.SingleResponse;
+import com.codingapi.springboot.framework.event.EventPusher;
 import com.example.springboot.demo.convertor.AnimalSaveEventConvertor;
 import com.example.springboot.demo.domain.refrigerator.RefrigeratorProfile;
 import com.example.springboot.demo.pojo.command.AnimalPutCommand;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import com.example.springboot.demo.repository.db.mapper.RefrigeratorMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author lorne
  * @date 2020/1/23
  * @description
  */
-@Executor
+@Component
 @AllArgsConstructor
-public class AnimalPutCmdExe implements ExecutorI<SingleResponse<Refrigerator>, AnimalPutCommand> {
+public class AnimalPutCmdExe  {
 
     private RefrigeratorMapper refrigeratorMapper;
 
-    @Override
     public SingleResponse<Refrigerator> execute(AnimalPutCommand cmd) {
         //查询到空的地方
         Refrigerator refrigerator =  refrigeratorMapper.findSpace();
@@ -34,7 +32,7 @@ public class AnimalPutCmdExe implements ExecutorI<SingleResponse<Refrigerator>, 
         refrigeratorMapper.update(newRefrigerator);
 
         //加入推送消息
-        ServiceEventQueue.push(AnimalSaveEventConvertor.parser(newRefrigerator));
+        EventPusher.push(AnimalSaveEventConvertor.parser(newRefrigerator));
         return SingleResponse.of(newRefrigerator);
     }
 

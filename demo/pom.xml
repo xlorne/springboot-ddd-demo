@@ -14,12 +14,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.alibaba.cola</groupId>
-            <artifactId>cola-starter</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.example</groupId>
             <artifactId>client</artifactId>
             <version>0.0.1-SNAPSHOT</version>

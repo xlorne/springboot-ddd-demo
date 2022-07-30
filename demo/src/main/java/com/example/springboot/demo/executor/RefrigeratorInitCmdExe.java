@@ -1,20 +1,18 @@
 package com.example.springboot.demo.executor;
 
-import com.alibaba.cola.dto.Response;
-import com.alibaba.cola.executor.Executor;
-import com.alibaba.cola.executor.ExecutorI;
+import com.codingapi.springboot.framework.dto.response.Response;
 import com.example.springboot.demo.domain.refrigerator.RefrigeratorRandomProfile;
 import com.example.springboot.demo.pojo.command.RefrigeratorInitCommand;
 import com.example.springboot.demo.repository.db.mapper.RefrigeratorMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Executor
+@Component
 @AllArgsConstructor
-public class RefrigeratorInitCmdExe implements ExecutorI<Response, RefrigeratorInitCommand> {
+public class RefrigeratorInitCmdExe   {
 
     private RefrigeratorMapper refrigeratorMapper;
 
-    @Override
     public Response execute(RefrigeratorInitCommand cmd) {
 
         refrigeratorMapper.truncate();

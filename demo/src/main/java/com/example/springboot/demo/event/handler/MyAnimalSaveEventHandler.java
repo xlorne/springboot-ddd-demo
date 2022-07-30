@@ -1,21 +1,19 @@
 package com.example.springboot.demo.event.handler;
 
-import com.alibaba.cola.dto.Response;
-import com.alibaba.cola.event.EventHandler;
-import com.alibaba.cola.event.EventHandlerI;
+import com.codingapi.springboot.framework.handler.Handler;
+import com.codingapi.springboot.framework.handler.IHandler;
 import com.example.springboot.demo.event.domainevent.AnimalSaveEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@EventHandler
+@Handler
 @AllArgsConstructor
 @Slf4j
-public class MyAnimalSaveEventHandler implements EventHandlerI<Response, AnimalSaveEvent> {
+public class MyAnimalSaveEventHandler implements IHandler<AnimalSaveEvent> {
+
 
     @Override
-    public Response execute(AnimalSaveEvent animalSaveEvent) {
+    public void handler(AnimalSaveEvent animalSaveEvent) {
         log.info("多订阅者事件响应测试...,event=>{}",animalSaveEvent);
-        return Response.buildSuccess();
     }
-
 }

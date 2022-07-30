@@ -1,8 +1,5 @@
 package com.example.springboot.demo.pojo.command;
 
-import com.alibaba.cola.dto.Command;
-import com.alibaba.cola.dto.SingleResponse;
-import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class AnimalPutCommand extends Command<SingleResponse<Refrigerator>> {
+public class AnimalPutCommand   {
 
     private String name;
 

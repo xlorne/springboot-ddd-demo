@@ -1,6 +1,5 @@
 package com.example.springboot.demo.domain.refrigerator;
 
-import com.alibaba.cola.domain.EntityObject;
 import com.example.springboot.demo.repository.db.domain.Refrigerator;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +11,7 @@ import java.util.Date;
  * @description
  */
 @Slf4j
-public class RefrigeratorProfile extends EntityObject {
+public class RefrigeratorProfile {
 
     private final Refrigerator refrigerator;
 

@@ -11,8 +11,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.7.1</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>springboot-ddd-demo</artifactId>
@@ -29,9 +29,16 @@
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <maven.javadoc.plugin>2.10.3</maven.javadoc.plugin>
         <nexus.staging.maven.plugin>1.6.3</nexus.staging.maven.plugin>
+        <codingapi.framework.version>1.1.6</codingapi.framework.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.codingapi.springboot</groupId>
+            <artifactId>springboot-starter</artifactId>
+            <version>${codingapi.framework.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
